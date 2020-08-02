@@ -6,6 +6,7 @@ import Services from "./components/Services/Services";
 import TopNavigation from "./components/TopNavigation/TopNavigation";
 import Analysis from "./components/Analysis/Analysis";
 import Summary from "./components/Summary/Summary";
+import RecentsProjects from "./components/RecentsProjects/RecentsProjects";
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <Services/>
       <Analysis/>
     <Summary/>
+    <RecentsProjects/>
 
     </div>
   );

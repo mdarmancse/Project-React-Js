@@ -190,7 +190,35 @@
 
 }
 
+.projectCard{
 
+    margin:2px 2px 2px 2px;
+    border: none !important;
+    height: 25rem;
+    box-shadow: 0 0 4px 0 rgba(0,115,230,0.2);
+    border-radius: 5px;
 
+}
+
+.projectCard:hover{
+
+    box-shadow: 0 0 12px 0 rgba(0,115,230,0.2);
+}
+
+.projectCardTitle{
+
+    font-family: 'Montserrat',sans-serif;
+    font-weight: 600;
+    color:rgba(70, 70, 70, 0.96);
+    font-size: 18px;
+}
+
+.projectCardDes{
+
+    font-family: 'Raleway',sans-serif;
+    font-weight: 400;
+    color:rgba(70, 70, 70, 0.96);
+    font-size: 15px;
+}
 
 
