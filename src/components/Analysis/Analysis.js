@@ -26,10 +26,10 @@ class Analysis extends Component {
     }
 
     render() {
-        var blue= "rgba(44, 130, 201, 1)";
+       var blue= "rgba(0, 115, 230, 0.7)";
         return (
             <>
-                <Container classname="text-center">
+                <Container className="text-center">
                     <h1 className="serviceMainTitle text-center">Technology Used</h1>
                     <Row>
 
@@ -48,8 +48,8 @@ class Analysis extends Component {
                             <ResponsiveContainer>
                                 <BarChart width={100} height={300} data={this.state.data}>
                                     <XAxis dataKey="Technology"/>
-                                    <Tooltip />
-                                    <Bar datakey="Projects" fill={blue}>
+                                    <Tooltip/>
+                                    <Bar dataKey="Projects" fill={blue}>
                                     </Bar>
                                 </BarChart>
                             </ResponsiveContainer>

@@ -119,7 +119,76 @@
     font-size: 16px;
 }
 
+.summaryBanner {
+    background-image: url('../images/parallax.jpg');
+    min-height: 350px;
+    background-attachment: fixed;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
+.summaryBannerOverlay {
+    position: absolute;
+    min-height: 350px;
+    width: 100%;
+    background: rgba(0,0,0,.7);
+}
+.summarySection{
+
+    margin-top: 5rem;
+
+}
+
+.countNumber{
+
+    font-family: 'Montserrat',sans-serif;
+    font-weight: 600;
+    color:#ffffff;
+    font-size: 48px;
+}
+
+.countTitle{
+
+    font-family: 'Raleway',sans-serif;
+    font-weight: 600;
+    color:#ffffff;
+    font-size: 22px;
+}
+.countSection{
+
+    margin-top: 16%;
+
+}
+
+.cardTitle{
+
+    font-family: 'Raleway',sans-serif;
+    font-weight: 600;
+    color:rgba(70, 70, 70, 0.96);
+    font-size: 22px;
+}
+
+.cardSubtitle{
+
+    font-family: 'Montserrat',sans-serif;
+    font-weight: 400;
+    color:rgba(70, 70, 70, 0.96);
+    font-size: 14px;
+}
+
+.iconBullet{
+    color: #0073e6;
+    font-size: 16px;
+
+}
+
+.workCard{
+    margin-top: 16%;
+    padding: 10px 10px 10px 10px;
+    border-radius: 5px;
+
+}
 
 
 
