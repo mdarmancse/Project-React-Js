@@ -120,7 +120,7 @@
 }
 
 .summaryBanner {
-    background-image: url('../images/parallax.jpg');
+    background-image: url('../images/summary.jpg');
     min-height: 350px;
     background-attachment: fixed;
     background-position: 50%;
@@ -220,5 +220,31 @@
     color:rgba(70, 70, 70, 0.96);
     font-size: 15px;
 }
+
+.courseImg{
+    width: 100%;
+
+}
+
+.courseDetails{
+    color: #0073e6;
+    font-family: 'Raleway',sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.courseDetails.hover{
+
+    text-decoration: none;
+
+}
+
+.courseCol{
+
+    margin-top: 10px;
+}
+
+
 
 
