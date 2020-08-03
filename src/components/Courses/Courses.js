@@ -9,7 +9,7 @@ class Courses extends Component {
                 <Container>
                     <h1 className="serviceMainTitle text-center">OUR COURSES</h1>
                     <Row  className="courseCol"  >
-                        <Col lg={6} md={12} sm={12}>
+                        <Col lg={6} md={12} sm={12} className="p-2">
                             <Row>
                             <Col lg={6} md={6} sm={12}>
                                 <img className="courseImg" src="https://cdn.pixabay.com/photo/2016/01/19/17/53/writing-1149962__480.jpg"/>
@@ -30,7 +30,7 @@ class Courses extends Component {
 
                         </Col>
 
-                        <Col  lg={6} md={12} sm={12}>
+                        <Col  lg={6} md={12} sm={12} className="p-2">
                         <Row>
                             <Col lg={6} md={6} sm={12}>
                                 <img className="courseImg" src="https://cdn.pixabay.com/photo/2016/01/19/17/53/writing-1149962__480.jpg"/>
@@ -53,7 +53,7 @@ class Courses extends Component {
                     </Row>
 
                     <Row className="courseCol">
-                        <Col lg={6} md={12} sm={12}>
+                        <Col lg={6} md={12} sm={12} className="p-2">
                             <Row>
                                 <Col lg={6} md={6} sm={12}>
                                     <img className="courseImg" src="https://cdn.pixabay.com/photo/2016/01/19/17/53/writing-1149962__480.jpg"/>
@@ -74,7 +74,7 @@ class Courses extends Component {
 
                         </Col>
 
-                        <Col  lg={6} md={12} sm={12}>
+                        <Col  lg={6} md={12} sm={12} className="p-2">
                             <Row>
                                 <Col lg={6} md={6} sm={12}>
                                     <img className="courseImg" src="https://cdn.pixabay.com/photo/2016/01/19/17/53/writing-1149962__480.jpg"/>

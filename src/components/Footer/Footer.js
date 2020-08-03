@@ -10,7 +10,7 @@ class Footer extends Component {
             <>
                 <Container fluid={true} className="footer text-center">
                     <Row>
-                        <Col lg={3} md={6} sm={12} className="p-5 text-justify">
+                        <Col lg={3} md={6} sm={6} className="p-5 text-justify">
                             <h1 className="serviceName">Follow Me</h1>
                           <a className="socialLink" href="#"> <FontAwesomeIcon  icon={faFacebook} /> Facebook</a><br/>
                             <a href="#" className="socialLink">  <FontAwesomeIcon icon={faYoutube} /> YouTube</a>
@@ -18,7 +18,7 @@ class Footer extends Component {
 
                         </Col>
 
-                        <Col lg={3} md={6} sm={12} className="p-5 text-justify">
+                        <Col lg={3} md={6} sm={6} className="p-5 text-justify">
                             <h1 className="serviceName">Address</h1>
                             <p className="serviceDes"> <FontAwesomeIcon className="" icon={faMapMarkedAlt} /> West Dewannagar,Hathazari,Chattogram</p>
                             <p className="serviceDes">  <FontAwesomeIcon className="" icon={faEnvelope} /> amd55077@gmail.com</p>
@@ -27,7 +27,7 @@ class Footer extends Component {
 
                         </Col>
 
-                        <Col lg={3} md={6} sm={12} className="p-5 text-justify">
+                        <Col lg={3} md={6} sm={6} className="p-5 text-justify">
                             <h1 className="serviceName">Information</h1>
                             <a className="footerLink" href="#">About me</a><br/>
                             <a className="footerLink" href="#">My Resume</a><br/>
@@ -36,7 +36,7 @@ class Footer extends Component {
 
                         </Col>
 
-                        <Col lg={3} md={6} sm={12} className="p-5 text-justify">
+                        <Col lg={3} md={6} sm={6} className="p-5 text-justify">
                             <h1 className="serviceName">Legal</h1>
 
                             <a className="footerLink" href="#">Refund Policy</a><br/>

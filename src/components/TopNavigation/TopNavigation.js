@@ -11,16 +11,17 @@ class TopNavigation extends Component {
             navBarTitle:"navTitle",
             navLogo:[blackLogo],
             navBG:"navBackground",
+            navVarient:"dark",
             navBarItem:"navItem"
         }
     }
 
     onScroll=()=>{
       if(window.scrollY>100){
-            this.setState({navBarTitle:"navTitleScroll",navLogo:[blueLogo],navBG:"navBackgroundScroll",navBarItem:"navItemScroll"})
+            this.setState({ navVarient:"light",navBarTitle:"navTitleScroll",navLogo:[blueLogo],navBG:"navBackgroundScroll",navBarItem:"navItemScroll"})
       }
       else if(window.scrollX<100){
-          this.setState({navBarTitle:"navTitle",navLogo:[blackLogo],navBG:"navBackground",navBarItem:"navItem"})
+          this.setState({navVarient:"dark",navBarTitle:"navTitle",navLogo:[blackLogo],navBG:"navBackground",navBarItem:"navItem"})
 
       }
     };
@@ -32,7 +33,7 @@ class TopNavigation extends Component {
     render() {
         return (
             <>
-                <Navbar className={this.state.navBG} fixed="top" collapseOnSelect expand="lg"  variant="dark">
+                <Navbar className={this.state.navBG} fixed="top" collapseOnSelect expand="lg"  variant={this.state.navVarient}>
                     <Navbar.Brand className={this.state.navBarTitle}><img src={this.state.navLogo}/> aRman</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">

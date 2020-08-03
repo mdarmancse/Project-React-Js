@@ -16,7 +16,7 @@
 
 .topContent{
 
-    margin-top: 10rem;
+    margin-top: 12rem;
 }
 
 .topTitle{
@@ -50,6 +50,7 @@
     height: 22rem;
     padding: 60px 30px 60px 30px;
     box-shadow: 0 0 4px 0 rgba(0,115,230,0.2);
+    border-radius: 10px;
 }
 
 .serviceCard:hover{
@@ -196,7 +197,7 @@
     border: none !important;
     height: 25rem;
     box-shadow: 0 0 4px 0 rgba(0,115,230,0.2);
-    border-radius: 5px;
+    border-radius: 10px;
 
 }
 
