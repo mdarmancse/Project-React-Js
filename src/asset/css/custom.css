@@ -275,8 +275,14 @@
     color: #0073e6;
     font-size: 48px;
     cursor: pointer;
+}
 
-
+.circleImg{
+    margin: 0 auto;
+    width: 100px;
+    height: 100px;
+    border: 1px solid #0073e6;
+    border-radius: 50%;
 }
 
 
