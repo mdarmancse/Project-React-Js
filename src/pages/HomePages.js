@@ -11,10 +11,14 @@ import ClientReview from "../components/ClientReview/ClientReview";
 import Footer from "../components/Footer/Footer";
 
 class HomePages extends Component {
+    componentDidMount() {
+        window.scroll(0,0)
+    }
+
     render() {
         return (
             <>
-                <TopNavigation/>
+                <TopNavigation title="Home"/>
                 <TopBanner/>
                 <Services/>
                 <Analysis/>

@@ -1,15 +1,18 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import HomePages from "./pages/HomePages";
+import { BrowserRouter, Route, Link } from "react-router-dom";
+import AppRoute from "./router/AppRoute";
 
 
 function App() {
   return (
-    <div className="App">
+    <BrowserRouter className="App">
 
-        <HomePages/>
+      <AppRoute/>
 
-    </div>
+
+
+    </BrowserRouter>
   );
 }
 

@@ -18,16 +18,12 @@ class TopBanner extends Component {
 
                                 </Col>
 
-
                             </Row>
 
 
                         </Container>
 
-
                     </div>
-
-
 
                 </Container>
 

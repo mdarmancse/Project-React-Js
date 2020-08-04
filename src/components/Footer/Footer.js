@@ -3,6 +3,7 @@ import {Col, Container, Row} from "react-bootstrap";
 import {faCheckCircle, faEnvelope, faMapMarkedAlt, faPhone} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFacebook, faYoutube} from "@fortawesome/free-brands-svg-icons";
+import {Link} from "react-router-dom";
 
 class Footer extends Component {
     render() {
@@ -29,9 +30,8 @@ class Footer extends Component {
 
                         <Col lg={3} md={6} sm={6} className="p-5 text-justify">
                             <h1 className="serviceName">Information</h1>
-                            <a className="footerLink" href="#">About me</a><br/>
-                            <a className="footerLink" href="#">My Resume</a><br/>
-                            <a className="footerLink"  href="#">Contact me</a>
+                            <Link className="footerLink" to="/about">About me</Link><br/>
+                            <Link className="footerLink"  to="/contact">Contact me</Link>
 
 
                         </Col>
@@ -39,9 +39,9 @@ class Footer extends Component {
                         <Col lg={3} md={6} sm={6} className="p-5 text-justify">
                             <h1 className="serviceName">Legal</h1>
 
-                            <a className="footerLink" href="#">Refund Policy</a><br/>
-                            <a className="footerLink" href="#">Terms & Condition</a><br/>
-                            <a className="footerLink" href="#">Privacy Policy</a>
+                            <Link className="footerLink" to="/refund">Refund Policy</Link><br/>
+                            <Link className="footerLink" to="/terms">Terms & Condition</Link><br/>
+                            <Link className="footerLink" to="/privacy">Privacy Policy</Link>
 
                         </Col>
 

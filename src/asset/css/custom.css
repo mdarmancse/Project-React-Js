@@ -75,6 +75,7 @@
 
 .navTitle{
     font-family: Montserreat,sans-serif;
+    text-decoration: none !important;
     color:#ffffff;
     font-weight: 700;
     font-size: 24px;
@@ -83,6 +84,7 @@
 
 .navTitleScroll{
     font-family: Montserreat,sans-serif;
+    text-decoration: none !important;
     color: #0073e6 !important;
     font-weight: 700;
     font-size: 24px;
@@ -103,17 +105,18 @@
     -moz-transition: background-color 400ms linear;
     -webkit-transition: background-color 400ms linear;
     background-color: white !important;
+    box-shadow: 0 0 4px 0 rgba(0,115,230,0.2);
 }
 
 .navItem{
-    text-decoration: none;
+    text-decoration: none !important;
     font-family: Montserreat,sans-serif;
-    color:#ffffff !important;
+    color:#ffffff ;
     font-weight: 400;
     font-size: 16px;
 }
 .navItemScroll{
-    text-decoration: none;
+    text-decoration: none !important;
     font-family: Montserreat,sans-serif;
     color: rgba(70, 70, 70, 0.96) !important;
     font-weight: 400;
@@ -231,13 +234,13 @@
     color: #0073e6;
     font-family: 'Raleway',sans-serif;
     font-weight: 600;
-    text-decoration: none;
+    text-decoration: none!important;
     font-size: 18px;
 }
 
 .courseDetails.hover{
 
-    text-decoration: none;
+    text-decoration: none!important;
 
 }
 
@@ -346,4 +349,70 @@
 
 }
 
+.topFixedPage {
+    background-image: url('../images/pagetopjpg.jpg');
+    min-height: 280px;
+    background-attachment: fixed;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
+.topPageOverlay {
+    position: absolute;
+    min-height: 280px;
+    width: 100%;
+    background: rgba(0,0,0,.4);
+}
+
+.topContentPage{
+
+    margin-top: 8rem;
+}
+
+.topPageTitle{
+
+    font-family: 'Raleway',sans-serif;
+    font-weight: 600;
+    color:#ffffff;
+    font-size: 28px;
+}
+
+.form-control:focus{
+    border-radius: 5px;
+    border-color: #0073e6;
+    box-shadow: 0 0 4px 0 rgba(70, 70, 70, 0.2);
+}
+
+.image{
+    width: 100%;
+    margin-top: 1rem;
+}
+
+
+.link-style{
+    text-decoration: none !important;
+    color: #0073e6 !important;
+
+}
+
+.link-style:hover{
+    text-decoration: none !important;
+    color: white !important;
+
+}
+
+.courseDetailsName{
+    margin-top: 1rem;
+    font-family: 'Raleway',sans-serif;
+    font-weight: 600;
+    color: whitesmoke;
+    font-size: 22px;
+}
+.courseDetailsDes{
+    margin-top: 1rem;
+    font-family: 'Raleway',sans-serif;
+    font-weight: 400;
+    color: whitesmoke;
+    font-size: 14px;
+}

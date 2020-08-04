@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Col, Container, Row} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 class Courses extends Component {
     render() {
@@ -20,7 +21,7 @@ class Courses extends Component {
 
                                 <h5 className="projectCardTitle text-justify">Web development</h5>
                                 <p className="projectCardDes text-justify">I build native and cross platfrom mobile app for your business app for your business</p>
-                                <a className="courseDetails text-justify" href="#">Details</a>
+                                <Link className="courseDetails text-justify"to="/courseDetails">Details</Link>
 
 
                             </Col>
@@ -41,7 +42,7 @@ class Courses extends Component {
 
                                 <h5 className="projectCardTitle text-justify">Web development</h5>
                                 <p className="projectCardDes text-justify">I build native and cross platfrom mobile app for your business app for your business</p>
-                                <a className="courseDetails text-justify" href="#">Details</a>
+                                <Link className="courseDetails text-justify"to="/courseDetails">Details</Link>
 
 
                             </Col>
@@ -64,7 +65,7 @@ class Courses extends Component {
 
                                     <h5 className="projectCardTitle text-justify">Web development</h5>
                                     <p className="projectCardDes text-justify">I build native and cross platfrom mobile app for your business app for your business</p>
-                                    <a className="courseDetails text-justify" href="#">Details</a>
+                                    <Link className="courseDetails text-justify"to="/courseDetails">Details</Link>
 
 
                                 </Col>
@@ -85,7 +86,7 @@ class Courses extends Component {
 
                                     <h5 className="projectCardTitle text-justify">Web development</h5>
                                     <p className="projectCardDes text-justify">I build native and cross platfrom mobile app for your business app for your business</p>
-                                    <a className="courseDetails text-justify" href="#">Details</a>
+                                    <Link className="courseDetails text-justify"to="/courseDetails">Details</Link>
 
 
                                 </Col>

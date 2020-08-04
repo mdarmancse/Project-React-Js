@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Button, Card, Col, Container, Row} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 class RecentsProjects extends Component {
     render() {
@@ -17,7 +18,7 @@ class RecentsProjects extends Component {
                                         Some quick example text to build on the card title and make up the bulk of
                                         the card's content.
                                     </Card.Text>
-                                    <Button variant="outline-primary">Details</Button>
+                                    <Button variant="outline-primary"><Link className="link-style" to='/projects'>Details</Link></Button>
                                 </Card.Body>
                             </Card>
 
@@ -32,7 +33,7 @@ class RecentsProjects extends Component {
                                         Some quick example text to build on the card title and make up the bulk of
                                         the card's content.
                                     </Card.Text>
-                                    <Button variant="outline-primary">Details</Button>
+                                    <Button variant="outline-primary"><Link className="link-style" to='/projects'>Details</Link></Button>
                                 </Card.Body>
                             </Card>
 
@@ -48,7 +49,7 @@ class RecentsProjects extends Component {
                                         Some quick example text to build on the card title and make up the bulk of
                                         the card's content.
                                     </Card.Text>
-                                    <Button variant="outline-primary">Details</Button>
+                                    <Button variant="outline-primary"><Link className="link-style" to='/projects'>Details</Link></Button>
                                 </Card.Body>
                             </Card>
                         </Col>
