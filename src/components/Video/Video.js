@@ -4,13 +4,27 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheckCircle, faPlayCircle} from "@fortawesome/free-solid-svg-icons";
 import 'video-react/dist/video-react.css';
 import {Player,BigPlayButton} from 'video-react';
+import RestClient from "../../RestApi/RestClient";
+import AppUrl from "../../RestApi/AppUrl";
 
 class Video extends Component {
     constructor() {
         super();
         this.state={
-            show:false
+            show:false,
+            video_des:'',
+            video_url:''
         }
+    }
+    componentDidMount() {
+        RestClient.GetRequest(AppUrl.video).then(result=>{
+            this.setState({
+                video_des:result[0]['video_des'],
+                video_url:result[0]['video_url']
+
+            })
+        })
+
     }
 
     modalClose=()=>this.setState({show:false});
@@ -26,7 +40,7 @@ class Video extends Component {
                             <div className="videoCard">
 
                             <h5 className="videoTitle text-center">How I do</h5>
-                            <p className="videoDes text-justify">First i analysis the requirement of project. According to the requirement i make a proper technical analysis, then i build a software architecture. According to the planning i start coding. Testing is also going on with coding. Final testing take place after finishing coding part. After successful implementation i provide 6 month free bug fixing service for corresponding project.</p>
+                            <p className="videoDes text-justify">{this.state.video_des}</p>
                                 <p className="text-center"><FontAwesomeIcon onClick={this.modalOpen} className="playBtn" icon={faPlayCircle} /></p>
 
                             </div>
@@ -43,7 +57,7 @@ class Video extends Component {
 
                     <Modal.Body>
                         <Player>
-                            <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
+                            <source src={this.state.video_url} />
                             <BigPlayButton position="center"/>
                         </Player>
                     </Modal.Body>

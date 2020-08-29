@@ -33,12 +33,22 @@ class Authenticate
      * @param  string|null  $guard
      * @return mixed
      */
+//    public function handle($request, Closure $next, $guard = null)
+//    {
+//        return $next($request)
+//            ->header('Access-Control-Allow-Origin','*')
+//          ->header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+//       ->header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+//       ->header('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers,X-Access-Token,XKey,Authorization');
+//
+//    }
+
+
     public function handle($request, Closure $next, $guard = null)
     {
-        if ($this->auth->guard($guard)->guest()) {
-            return response('Unauthorized.', 401);
-        }
+        return $next($request)
+            ->header('Access-Control-Allow-Origin','*')
+            ->header('Access-Control-Allow-Methods','*');
 
-        return $next($request);
     }
 }

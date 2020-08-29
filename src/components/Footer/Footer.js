@@ -4,8 +4,36 @@ import {faCheckCircle, faEnvelope, faMapMarkedAlt, faPhone} from "@fortawesome/f
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFacebook, faYoutube} from "@fortawesome/free-brands-svg-icons";
 import {Link} from "react-router-dom";
+import RestClient from "../../RestApi/RestClient";
+import AppUrl from "../../RestApi/AppUrl";
 
 class Footer extends Component {
+    constructor() {
+        super();
+        this.state={
+            address:'...',
+            email:'...',
+            phone:'...',
+            facebook:'...',
+            youtube:'...',
+            footer_credit:'...'
+
+        }
+    }
+
+    componentDidMount() {
+        RestClient.GetRequest(AppUrl.footer).then(result=>{
+            this.setState({
+                address:result[0]['address'],
+                email:result[0]['email'],
+                phone:result[0]['phone'],
+                facebook:result[0]['facebook'],
+                youtube:result[0]['youtube'],
+                footer_credit:result[0]['footer_credit'],
+            })
+        })
+
+    }
     render() {
         return (
             <>
@@ -13,17 +41,17 @@ class Footer extends Component {
                     <Row>
                         <Col lg={3} md={6} sm={6} className="p-5 text-justify">
                             <h1 className="serviceName">Follow Me</h1>
-                          <a className="socialLink" href="#"> <FontAwesomeIcon  icon={faFacebook} /> Facebook</a><br/>
-                            <a href="#" className="socialLink">  <FontAwesomeIcon icon={faYoutube} /> YouTube</a>
+                          <a className="socialLink" href="#"> <FontAwesomeIcon  icon={faFacebook} />{this.state.facebook}</a><br/>
+                            <a href="#" className="socialLink">  <FontAwesomeIcon icon={faYoutube} /> {this.state.youtube}</a>
 
 
                         </Col>
 
                         <Col lg={3} md={6} sm={6} className="p-5 text-justify">
                             <h1 className="serviceName">Address</h1>
-                            <p className="serviceDes"> <FontAwesomeIcon className="" icon={faMapMarkedAlt} /> West Dewannagar,Hathazari,Chattogram</p>
-                            <p className="serviceDes">  <FontAwesomeIcon className="" icon={faEnvelope} /> amd55077@gmail.com</p>
-                            <p className="serviceDes">  <FontAwesomeIcon className="" icon={faPhone} /> +8801787281564</p>
+                            <p className="serviceDes"> <FontAwesomeIcon className="" icon={faMapMarkedAlt} /> {this.state.address}</p>
+                            <p className="serviceDes">  <FontAwesomeIcon className="" icon={faEnvelope} /> {this.state.email}</p>
+                            <p className="serviceDes">  <FontAwesomeIcon className="" icon={faPhone} /> {this.state.phone}</p>
 
 
                         </Col>

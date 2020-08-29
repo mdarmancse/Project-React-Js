@@ -9,9 +9,11 @@ class ContactController extends Controller
 {
     function onContactSend(Request $request){
 
-        $name=$request->input('name');
-        $email=$request->input('email');
-        $message=$request->input('message');
+       $contactArray=json_decode( $request->getContent(),true);
+
+        $name=$contactArray['name'];
+        $email=$contactArray['email'];
+        $message=$contactArray['message'];
 
         $result=ContactTable::insert(
             [
@@ -27,5 +29,7 @@ class ContactController extends Controller
         else{
             return 0;
         }
+
+
     }
 }

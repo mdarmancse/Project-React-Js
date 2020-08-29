@@ -1,100 +1,56 @@
 import React, {Component} from 'react';
 import {Col, Container, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
+import RestClient from "../../RestApi/RestClient";
+import AppUrl from "../../RestApi/AppUrl";
 
 class Courses extends Component {
+    constructor() {
+        super();
+        this.state={
+            myData:[]
+        }
+    }
+
+    componentDidMount() {
+        RestClient.GetRequest(AppUrl.courseHome).then(result=>{
+
+            this.setState({myData:result})
+        })
+    }
+
     render() {
+        const myList=this.state.myData;
+        const myView=myList.map(myList=>{
+            return    <Col lg={6} md={12} sm={12} className="p-2">
+                <Row>
+                    <Col lg={6} md={6} sm={12}>
+                        <img className="courseImg" src={myList.small_img}/>
+
+                    </Col>
+
+                    <Col lg={6} md={6} sm={12}>
+
+                        <h5 className="projectCardTitle text-justify">{myList.short_title}</h5>
+                        <p className="projectCardDes text-justify">{myList.short_des}</p>
+                        <Link className="courseDetails text-justify" to="/courseDetails">Details</Link>
+
+
+                    </Col>
+
+                </Row>
+
+
+            </Col>
+        })
+
         return (
             <>
 
                 <Container>
                     <h1 className="serviceMainTitle text-center">OUR COURSES</h1>
                     <Row  className="courseCol"  >
-                        <Col lg={6} md={12} sm={12} className="p-2">
-                            <Row>
-                            <Col lg={6} md={6} sm={12}>
-                                <img className="courseImg" src="https://cdn.pixabay.com/photo/2016/01/19/17/53/writing-1149962__480.jpg"/>
-
-                            </Col>
-
-                            <Col lg={6} md={6} sm={12}>
-
-                                <h5 className="projectCardTitle text-justify">Web development</h5>
-                                <p className="projectCardDes text-justify">I build native and cross platfrom mobile app for your business app for your business</p>
-                                <Link className="courseDetails text-justify"to="/courseDetails">Details</Link>
-
-
-                            </Col>
-
-                        </Row>
-
-
-                        </Col>
-
-                        <Col  lg={6} md={12} sm={12} className="p-2">
-                        <Row>
-                            <Col lg={6} md={6} sm={12}>
-                                <img className="courseImg" src="https://cdn.pixabay.com/photo/2016/01/19/17/53/writing-1149962__480.jpg"/>
-
-                            </Col>
-
-                            <Col lg={6} md={6} sm={12}>
-
-                                <h5 className="projectCardTitle text-justify">Web development</h5>
-                                <p className="projectCardDes text-justify">I build native and cross platfrom mobile app for your business app for your business</p>
-                                <Link className="courseDetails text-justify"to="/courseDetails">Details</Link>
-
-
-                            </Col>
-
-                        </Row>
-
-                    </Col>
-
-                    </Row>
-
-                    <Row className="courseCol">
-                        <Col lg={6} md={12} sm={12} className="p-2">
-                            <Row>
-                                <Col lg={6} md={6} sm={12}>
-                                    <img className="courseImg" src="https://cdn.pixabay.com/photo/2016/01/19/17/53/writing-1149962__480.jpg"/>
-
-                                </Col>
-
-                                <Col lg={6} md={6} sm={12}>
-
-                                    <h5 className="projectCardTitle text-justify">Web development</h5>
-                                    <p className="projectCardDes text-justify">I build native and cross platfrom mobile app for your business app for your business</p>
-                                    <Link className="courseDetails text-justify"to="/courseDetails">Details</Link>
-
-
-                                </Col>
-
-                            </Row>
-
-
-                        </Col>
-
-                        <Col  lg={6} md={12} sm={12} className="p-2">
-                            <Row>
-                                <Col lg={6} md={6} sm={12}>
-                                    <img className="courseImg" src="https://cdn.pixabay.com/photo/2016/01/19/17/53/writing-1149962__480.jpg"/>
-
-                                </Col>
-
-                                <Col lg={6} md={6} sm={12}>
-
-                                    <h5 className="projectCardTitle text-justify">Web development</h5>
-                                    <p className="projectCardDes text-justify">I build native and cross platfrom mobile app for your business app for your business</p>
-                                    <Link className="courseDetails text-justify"to="/courseDetails">Details</Link>
-
-
-                                </Col>
-
-                            </Row>
-
-                        </Col>
-
+                        {myView}
                     </Row>
 
 

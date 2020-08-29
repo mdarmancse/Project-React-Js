@@ -17,25 +17,30 @@ $router->get('/', function () use ($router) {
 });
 
 
-$router->get('/chartData','ChartDataController@onSelect');
-$router->get('/clientReview','ClientReviewController@onSelect');
-$router->post('/contactSend','ContactController@onContactSend');
+$router->get('/chartData',['middleware'=>'auth','uses'=>'ChartDataController@onSelect']);
+$router->get('/clientReview',['middleware'=>'auth','uses'=>'ClientReviewController@onSelect']);
+$router->post('/contactSend',['middleware'=>'auth','uses'=>'ContactController@onContactSend']);
 
-$router->get('/courseHome','CourseController@onSelectFour');
-$router->get('/courseAll','CourseController@onSelectAll');
-$router->post('/courseDetails','CourseController@onSelectDetails');
+$router->get('/courseHome',['middleware'=>'auth','uses'=>'CourseController@onSelectFour']);
+$router->get('/courseAll',['middleware'=>'auth','uses'=>'CourseController@onSelectAll']);
+$router->post('/courseDetails',['middleware'=>'auth','uses'=>'CourseController@onSelectDetails']);
 
-$router->get('/footer','FooterController@onSelect');
-$router->get('/information','InformationController@onSelect');
-$router->get('/services','ServiceController@onSelect');
-
-
-$router->get('/projectHome','ProjectController@onSelectThree');
-$router->get('/projectAll','ProjectController@onSelectAll');
-$router->post('/projectDetails','ProjectController@onSelectDetails');
+$router->get('/footer',['middleware'=>'auth','uses'=>'FooterController@onSelect']);
+$router->get('/information',['middleware'=>'auth','uses'=>'InformationController@onSelect']);
+$router->get('/services',['middleware'=>'auth','uses'=>'ServiceController@onSelect']);
 
 
-$router->get('/video','HomeEtcController@video');
-$router->get('/homeTop','HomeEtcController@homeTop');
-$router->get('/techDes','HomeEtcController@techDes');
-$router->get('/projectClient','HomeEtcController@projectClient');
+$router->get('/projectHome',['middleware'=>'auth','uses'=>'ProjectController@onSelectThree']);
+$router->get('/projectAll',['middleware'=>'auth','uses'=>'ProjectController@onSelectAll']);
+$router->post('/projectDetails',['middleware'=>'auth','uses'=>'ProjectController@onSelectDetails']);
+
+
+$router->get('/video',['middleware'=>'auth','uses'=>'HomeEtcController@video']);
+$router->get('/techDes',['middleware'=>'auth','uses'=>'HomeEtcController@techDes']);
+
+$router->get('/homeTop',['middleware'=>'auth','uses'=>'HomeEtcController@homeTop']);
+$router->get('/projectClient',['middleware'=>'auth','uses'=>'HomeEtcController@projectClient']);
+
+
+
+
