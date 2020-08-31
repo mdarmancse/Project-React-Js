@@ -3,51 +3,56 @@ import {Col, Container, Row} from "react-bootstrap";
 import graphics from "../../asset/images/graphics.svg";
 import mobile from "../../asset/images/mobile.svg";
 import web from "../../asset/images/web.svg";
+import Services from "../Services/Services";
+import RestClient from "../../RestApi/RestClient";
+import AppUrl from "../../RestApi/AppUrl";
 
 class AllServices extends Component {
+    constructor() {
+        super();
+        this.state={
+            myData:[]
+        }
+    }
+
+    componentDidMount() {
+        RestClient.GetRequest(AppUrl.services).then(result=>{
+
+            this.setState({myData:result});
+
+        })
+    }
+
+
     render() {
+        const myList=this.state.myData;
+        const myView=myList.map(myList=>{
+            return <Col lg={4} md={6} sm={12}>
+                <div className="serviceCard text-center">
+                    <img src={myList.service_logo}/>
+                    <h2 className="serviceName">{myList.service_name}</h2>
+                    <p className="serviceDes">{myList.service_des}</p>
+
+                </div>
+            </Col>
+        });
+
         return (
             <>
                 <Container className="mt-5">
 
                     <Row>
 
-
-                        <Col lg={4} md={8} sm={12}>
-                            <div className="serviceCard text-center">
-                                <img src={graphics}/>
-                                <h2 className="serviceName">Graphics Design</h2>
-                                <p className="serviceDes">I desing modern user interface and other graphical components for your business and instiution.</p>
-
-                            </div>
-
-
-                        </Col>
-                        <Col lg={4} md={8} sm={12}>
-                            <div className="serviceCard text-center">
-                                <img src={mobile}/>
-                                <h2 className="serviceName">Mobile Development</h2>
-                                <p className="serviceDes">I build native and cross platfrom mobile app for your business and instiution as per as your requirements.</p>
-                            </div>
-
-                        </Col>
-                        <Col lg={4} md={8} sm={12}>
-                            <div className="serviceCard text-center">
-                                <img src={web}/>
-                                <h2 className="serviceName">Web Development</h2>
-                                <p className="serviceDes">I design and develop static and dynamic web sites as per your requirements as we believe, “web is world’s next home”.</p>
-
-                            </div>
-                        </Col>
+                        {myView}
 
                     </Row>
 
                 </Container>
 
-
             </>
         );
     }
 }
+
 
 export default AllServices;

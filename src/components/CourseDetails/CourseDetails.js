@@ -3,9 +3,52 @@ import {Button, Card, Col, Container, Row} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheckCircle} from "@fortawesome/free-solid-svg-icons";
 import {BigPlayButton, Player} from "video-react";
+import ReactHtmlParser from "react-html-parser";
+import RestClient from "../../RestApi/RestClient";
+import AppUrl from "../../RestApi/AppUrl";
 
 class CourseDetails extends Component {
+
+
+    constructor(props) {
+        super(props);
+        this.state={
+            myCourseID:props.id,
+          long_title:"",
+        long_des:"",
+        total_lecture:"",
+        total_student:"",
+        skill_all:"",
+        video_url:"",
+        short_des:"",
+        moreInfo:""
+
+    }
+
+    }
+
+    componentDidMount() {
+        RestClient.GetRequest(AppUrl.courseDetails+this.state.myCourseID).then(result=>{
+
+            this.setState({
+                long_title:result[0]['long_title'],
+                long_des:result[0]['long_des'],
+                total_lecture:result[0]['total_lecture'],
+                total_student:result[0]['total_student'],
+                skill_all:result[0]['skill_all'],
+                short_des:result[0]['short_des'],
+                video_url:result[0]['video_url'],
+                moreInfo:result[0]['courses_link'],
+            })
+
+        }).catch(error=>{
+
+        })
+    }
+
     render() {
+
+
         return (
             <>
                 <Container fluid={true} className="topFixedPage p-0">
@@ -13,14 +56,14 @@ class CourseDetails extends Component {
                         <Container className="topContentPage">
                             <Row>
                                 <Col lg={6}  md={6} sm={12}>
-                                    <h1 className="courseDetailsName">Web Development Full Online Course</h1>
-                                    <p className="courseDetailsDes">Total Lecture=100</p>
-                                    <p className="courseDetailsDes">Total Student=100</p>
+                                    <h1 className="courseDetailsName">{this.state.long_title}</h1>
+                                    <p className="courseDetailsDes">Total Lecture: {this.state.total_lecture}</p>
+                                    <p className="courseDetailsDes">Total Student: {this.state.total_student}</p>
 
 
                                 </Col>
                                 <Col lg={6}  md={6} sm={12}>
-                                    <p className="courseDetailsDes">I build native and cross platfrom mobile app for your business app for your business. I build native and cross platfrom mobile app for your business app for your business</p>
+                                    <p className="courseDetailsDes">{ReactHtmlParser(this.state.long_des)}</p>
                                 </Col>
 
 
@@ -37,17 +80,14 @@ class CourseDetails extends Component {
                     <Row>
                         <Col lg={6} md={6} sm={12}>
                             <h1 className="serviceName mb-3">Skill You Get</h1>
-                            <p className="cardSubtitle text-justify"><FontAwesomeIcon className="iconBullet" icon={faCheckCircle} /> Web Development Skill</p>
-                            <p className="cardSubtitle text-justify"><FontAwesomeIcon className="iconBullet" icon={faCheckCircle} /> Web Development Skill</p>
-                            <p className="cardSubtitle text-justify"><FontAwesomeIcon className="iconBullet" icon={faCheckCircle} /> Web Development Skill</p>
-                            <p className="cardSubtitle text-justify"><FontAwesomeIcon className="iconBullet" icon={faCheckCircle} /> Web Development Skill</p>
-                            <p className="cardSubtitle text-justify"><FontAwesomeIcon className="iconBullet" icon={faCheckCircle} /> Web Development Skill</p>
-                            <p className="cardSubtitle text-justify"><FontAwesomeIcon className="iconBullet" icon={faCheckCircle} /> Web Development Skill</p>
-                            <Button variant="outline-primary">More Info</Button>
+                            {/*<p className="cardSubtitle text-justify"><FontAwesomeIcon className="iconBullet" icon={faCheckCircle} />{ReactHtmlParser(skill_all)}</p>*/}
+                            <p className="cardSubtitle text-justify">{ReactHtmlParser(this.state.skill_all)}</p>
+
+                            <Button target='_blank' href={'//'+this.state.moreInfo} variant="outline-primary">More Info</Button>
                         </Col>
                         <Col lg={6} md={6} sm={12} className="mb-3">
                             <Player>
-                                <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
+                                <source src='https://media.w3.org/2010/05/sintel/trailer_hd.mp4' />
                                 <BigPlayButton position="center"/>
                             </Player>
                         </Col>

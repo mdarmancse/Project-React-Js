@@ -31,7 +31,7 @@ class AllProjects extends Component {
                         <Card.Text className="projectCardDes">
                             {myList.short_des}
                         </Card.Text>
-                        <Button variant="outline-primary"><Link className="link-style" to='/projects'>Details</Link></Button>
+                        <Button variant="outline-primary"><Link className="link-style" to={'/projects/'+myList.id+'/'+myList.project_name}>Details</Link></Button>
                     </Card.Body>
                 </Card>
 

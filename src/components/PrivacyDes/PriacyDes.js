@@ -25,7 +25,7 @@ class PriacyDes extends Component {
             <>
                 <Container className="mt-5">
                     <Row>
-                        <Col lg={12} md={12} sm={12}>
+                        <Col lg={12} md={12} sm={12} className="serviceDes">
                             {ReactHtmlParser(this.state.data)}
 
                         </Col>

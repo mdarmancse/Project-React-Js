@@ -1,30 +1,53 @@
 import React, {Component} from 'react';
 import {Button, Card, Col, Container, Row} from "react-bootstrap";
+import RestClient from "../../RestApi/RestClient";
+import AppUrl from "../../RestApi/AppUrl";
+import ReactHtmlParser from "react-html-parser";
 
 class ProjectDetails extends Component {
+    constructor(props) {
+        super();
+        this.state={
+            myProjectID:props.id,
+            img_two:'',
+            project_name:'',
+            short_des:'',
+            project_feature:'',
+            live_preview:'',
+
+        }
+    }
+    componentDidMount(){
+
+        RestClient.GetRequest(AppUrl.projectDetails+this.state.myProjectID).then(result=>{
+
+            this.setState({
+                img_two:result[0]['img_two'],
+                project_name:result[0]['project_name'],
+                short_des:result[0]['short_des'],
+                project_feature:result[0]['project_feature'],
+                live_preview:result[0]['live_preview'],
+            })
+
+        }).catch(error=>{
+
+        })
+    }
     render() {
         return (
             <>
                 <Container className="mt-5">
                     <Row>
                         <Col lg={6} md={6} sm={12}>
-                            <img className="image" src="https://cdn.pixabay.com/photo/2017/05/07/19/32/strawberry-2293337_960_720.jpg"/>
+                            <img className="image" src={this.state.img_two}/>
 
                         </Col>
                         <Col lg={6} md={6} sm={12}>
-                            <h1 className="serviceName">Foll Bazar</h1>
-                            <p className="serviceDes">Complete e-commerce app solution for selling fruit online. According to build quality, data loading speed this is the best one</p>
-                            <ul>
-                                <li className="serviceDes">Unlimited Dynamic Product Category</li>
-                                <li className="serviceDes">Admin Can Add, Edit, Delete Product Dynamically</li>
-                                <li className="serviceDes">Dynamic shipping point facilities</li>
-                                <li className="serviceDes">Admin can send special offer for special user</li>
-                                <li className="serviceDes">App force update system form server</li>
-                                <li className="serviceDes">App can receive push notification anytime also after the app is closed.</li>
-                                <li className="serviceDes">Admin can send free message in app inbox</li>
-                            </ul>
+                            <h1 className="serviceName">{this.state.project_name}</h1>
+                            <p className="serviceDes">{this.state.short_des}
+                                {ReactHtmlParser(this.state.project_feature)}</p>
 
-                            <Button variant="outline-primary">More Info</Button>
+                            <Button target='-_blank' href={'//'+this.state.live_preview} variant="outline-primary">More Info</Button>
 
 
                         </Col>

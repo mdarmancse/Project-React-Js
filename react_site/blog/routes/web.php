@@ -23,7 +23,7 @@ $router->post('/contactSend',['middleware'=>'auth','uses'=>'ContactController@on
 
 $router->get('/courseHome',['middleware'=>'auth','uses'=>'CourseController@onSelectFour']);
 $router->get('/courseAll',['middleware'=>'auth','uses'=>'CourseController@onSelectAll']);
-$router->post('/courseDetails',['middleware'=>'auth','uses'=>'CourseController@onSelectDetails']);
+$router->get('/courseDetails/{courseID}',['middleware'=>'auth','uses'=>'CourseController@onSelectDetails']);
 
 $router->get('/footer',['middleware'=>'auth','uses'=>'FooterController@onSelect']);
 $router->get('/information',['middleware'=>'auth','uses'=>'InformationController@onSelect']);
@@ -32,7 +32,7 @@ $router->get('/services',['middleware'=>'auth','uses'=>'ServiceController@onSele
 
 $router->get('/projectHome',['middleware'=>'auth','uses'=>'ProjectController@onSelectThree']);
 $router->get('/projectAll',['middleware'=>'auth','uses'=>'ProjectController@onSelectAll']);
-$router->post('/projectDetails',['middleware'=>'auth','uses'=>'ProjectController@onSelectDetails']);
+$router->get('/projectDetails/{projectID}',['middleware'=>'auth','uses'=>'ProjectController@onSelectDetails']);
 
 
 $router->get('/video',['middleware'=>'auth','uses'=>'HomeEtcController@video']);
