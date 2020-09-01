@@ -6,6 +6,7 @@ import 'video-react/dist/video-react.css';
 import {Player,BigPlayButton} from 'video-react';
 import RestClient from "../../RestApi/RestClient";
 import AppUrl from "../../RestApi/AppUrl";
+import Loading from "../Loading/Loading";
 
 class Video extends Component {
     constructor() {
@@ -13,14 +14,16 @@ class Video extends Component {
         this.state={
             show:false,
             video_des:'',
-            video_url:''
+            video_url:'',
+            loading:true
         }
     }
     componentDidMount() {
         RestClient.GetRequest(AppUrl.video).then(result=>{
             this.setState({
                 video_des:result[0]['video_des'],
-                video_url:result[0]['video_url']
+                video_url:result[0]['video_url'],
+                loading:false
 
             })
         })
@@ -31,45 +34,53 @@ class Video extends Component {
     modalOpen=()=>this.setState({show:true});
 
     render() {
-        return (
-            <>
-                <Container>
-                    <Row>
-                        <Col lg={12} md={12} sm={12}>
+        if(this.state.loading==true){
 
-                            <div className="videoCard">
+            return <Loading/>
 
-                            <h5 className="videoTitle text-center">How I do</h5>
-                            <p className="videoDes text-justify">{this.state.video_des}</p>
-                                <p className="text-center"><FontAwesomeIcon onClick={this.modalOpen} className="playBtn" icon={faPlayCircle} /></p>
+        }else {
+            return (
+                <>
+                    <Container>
+                        <Row>
+                            <Col lg={12} md={12} sm={12}>
 
-                            </div>
-                        </Col>
+                                <div className="videoCard">
+
+                                    <h5 className="videoTitle text-center">How I do</h5>
+                                    <p className="videoDes text-justify">{this.state.video_des}</p>
+                                    <p className="text-center"><FontAwesomeIcon onClick={this.modalOpen} className="playBtn" icon={faPlayCircle} /></p>
+
+                                </div>
+                            </Col>
 
 
-                    </Row>
+                        </Row>
 
 
-                </Container>
+                    </Container>
 
 
-                <Modal size="lg" show={this.state.show} onHide={this.modalClose}>
+                    <Modal size="lg" show={this.state.show} onHide={this.modalClose}>
 
-                    <Modal.Body>
-                        <Player>
-                            <source src={this.state.video_url} />
-                            <BigPlayButton position="center"/>
-                        </Player>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="outline-danger" onClick={this.modalClose}>
-                            Close
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
+                        <Modal.Body>
+                            <Player>
+                                <source src={this.state.video_url} />
+                                <BigPlayButton position="center"/>
+                            </Player>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="outline-danger" onClick={this.modalClose}>
+                                Close
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
 
-            </>
-        );
+                </>
+            );
+        }
+
+
     }
 }
 

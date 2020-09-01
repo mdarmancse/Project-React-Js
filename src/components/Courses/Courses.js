@@ -3,63 +3,73 @@ import {Col, Container, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import RestClient from "../../RestApi/RestClient";
 import AppUrl from "../../RestApi/AppUrl";
+import Loading from "../Loading/Loading";
 
 class Courses extends Component {
     constructor() {
         super();
         this.state={
-            myData:[]
+            myData:[],
+            loading:true
         }
     }
 
     componentDidMount() {
         RestClient.GetRequest(AppUrl.courseHome).then(result=>{
 
-            this.setState({myData:result})
+            this.setState({myData:result,loading:false})
         })
     }
 
     render() {
-        const myList=this.state.myData;
-        const myView=myList.map(myList=>{
-            return    <Col lg={6} md={12} sm={12} className="p-2">
-                <Row>
-                    <Col lg={6} md={6} sm={12}>
-                        <img className="courseImg" src={myList.small_img}/>
 
-                    </Col>
+        if(this.state.loading==true){
 
-                    <Col lg={6} md={6} sm={12}>
+            return <Loading/>
 
-                        <h5 className="projectCardTitle text-justify">{myList.short_title}</h5>
-                        <p className="projectCardDes text-justify">{myList.short_des}</p>
-                        <Link className="courseDetails text-justify" to={"/courseDetails/"+myList.id}>Details</Link>
+        }else {
+            const myList=this.state.myData;
+            const myView=myList.map(myList=>{
+                return    <Col lg={6} md={12} sm={12} className="p-2">
+                    <Row>
+                        <Col lg={6} md={6} sm={12}>
+                            <img className="courseImg" src={myList.small_img}/>
+
+                        </Col>
+
+                        <Col lg={6} md={6} sm={12}>
+
+                            <h5 className="projectCardTitle text-justify">{myList.short_title}</h5>
+                            <p className="projectCardDes text-justify">{myList.short_des}</p>
+                            <Link className="courseDetails text-justify" to={"/courseDetails/"+myList.id}>Details</Link>
 
 
-                    </Col>
+                        </Col>
 
-                </Row>
-
-
-            </Col>
-        })
-
-        return (
-            <>
-
-                <Container>
-                    <h1 className="serviceMainTitle text-center">OUR COURSES</h1>
-                    <Row  className="courseCol"  >
-                        {myView}
                     </Row>
 
 
+                </Col>
+            })
+
+            return (
+                <>
+
+                    <Container>
+                        <h1 className="serviceMainTitle text-center">OUR COURSES</h1>
+                        <Row  className="courseCol"  >
+                            {myView}
+                        </Row>
 
 
-                </Container>
 
-            </>
-        );
+
+                    </Container>
+
+                </>
+            );
+        }
+
     }
 }
 

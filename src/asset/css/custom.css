@@ -24,7 +24,7 @@
     font-family: 'Montserrat',sans-serif;
     font-weight: 700;
     color:#ffffff;
-    font-size: 48px; 
+    font-size: 48px;
 }
 
 .topSubtitle{
@@ -415,4 +415,8 @@
     font-weight: 400;
     color: whitesmoke;
     font-size: 14px;
+}
+.loader{
+    width: 180px;
+    height: 180px;
 }

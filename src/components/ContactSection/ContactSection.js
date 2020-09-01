@@ -4,6 +4,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEnvelope, faMapMarkedAlt, faPhone} from "@fortawesome/free-solid-svg-icons";
 import RestClient from "../../RestApi/RestClient";
 import AppUrl from "../../RestApi/AppUrl";
+import Loading from "../Loading/Loading";
 
 class ContactSection extends Component {
     constructor() {
@@ -12,6 +13,8 @@ class ContactSection extends Component {
             address:'...',
             email:'...',
             phone:'...',
+            loading:true
+
 
 
         }
@@ -23,6 +26,7 @@ class ContactSection extends Component {
                 address:result[0]['address'],
                 email:result[0]['email'],
                 phone:result[0]['phone'],
+                loading:false
 
             })
         })
@@ -46,51 +50,61 @@ class ContactSection extends Component {
 
     }
     render() {
-        return (
-            <>
-                <Container className="mt-5">
-                    <Row>
-                        <Col lg={6} md={6} sm={12}>
-                            <h1 className="serviceName">Quick Connect</h1>
-                            <Form>
-                                <Form.Group>
-                                    <Form.Label className="serviceDes">Name</Form.Label>
-                                    <Form.Control id="name" type="text" placeholder="Enter your name" />
 
-                                </Form.Group>
+        if(this.state.loading==true){
 
-                                <Form.Group>
-                                    <Form.Label className="serviceDes">Email</Form.Label>
-                                    <Form.Control id="email" type="email" placeholder="Enter your email" />
+            return <Loading/>
 
-                                </Form.Group>
+        }else {
 
-                                <Form.Group>
-                                    <Form.Label className="serviceDes">Message</Form.Label>
-                                    <Form.Control id="message" as="textarea" rows="3" placeholder="Your message" />
+            return (
+                <>
+                    <Container className="mt-5">
+                        <Row>
+                            <Col lg={6} md={6} sm={12}>
+                                <h1 className="serviceName">Quick Connect</h1>
+                                <Form>
+                                    <Form.Group>
+                                        <Form.Label className="serviceDes">Name</Form.Label>
+                                        <Form.Control id="name" type="text" placeholder="Enter your name" />
 
-                                </Form.Group>
-                                <Button onClick={this.sendMessage} variant="primary">
-                                    Send
-                                </Button>
-                            </Form>
+                                    </Form.Group>
 
-                        </Col>
+                                    <Form.Group>
+                                        <Form.Label className="serviceDes">Email</Form.Label>
+                                        <Form.Control id="email" type="email" placeholder="Enter your email" />
 
-                        <Col lg={6} md={6} sm={12} className="text-justify">
+                                    </Form.Group>
 
-                            <h1 className="serviceName">Discuss Now</h1>
-                            <p className="serviceDes"> <FontAwesomeIcon className="" icon={faMapMarkedAlt} /> {this.state.address}</p>
-                            <p className="serviceDes">  <FontAwesomeIcon className="" icon={faEnvelope} /> {this.state.email}</p>
-                            <p className="serviceDes">  <FontAwesomeIcon className="" icon={faPhone} /> {this.state.phone}</p>
+                                    <Form.Group>
+                                        <Form.Label className="serviceDes">Message</Form.Label>
+                                        <Form.Control id="message" as="textarea" rows="3" placeholder="Your message" />
 
-                        </Col>
-                    </Row>
-                </Container>
+                                    </Form.Group>
+                                    <Button onClick={this.sendMessage} variant="primary">
+                                        Send
+                                    </Button>
+                                </Form>
+
+                            </Col>
+
+                            <Col lg={6} md={6} sm={12} className="text-justify">
+
+                                <h1 className="serviceName">Discuss Now</h1>
+                                <p className="serviceDes"> <FontAwesomeIcon className="" icon={faMapMarkedAlt} /> {this.state.address}</p>
+                                <p className="serviceDes">  <FontAwesomeIcon className="" icon={faEnvelope} /> {this.state.email}</p>
+                                <p className="serviceDes">  <FontAwesomeIcon className="" icon={faPhone} /> {this.state.phone}</p>
+
+                            </Col>
+                        </Row>
+                    </Container>
 
 
-            </>
-        );
+                </>
+            );
+
+        }
+
     }
 }
 

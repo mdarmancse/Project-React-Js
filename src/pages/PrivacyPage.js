@@ -14,8 +14,8 @@ class PrivacyPage extends Component {
     render() {
         return (
             <>
-                <TopNavigation title="Privacy"/>
-                <PageTop pageTitle="Privacy"/>
+                <TopNavigation title="Privacy Policy"/>
+                <PageTop pageTitle="Privacy Policy"/>
                 <PriacyDes/>
                 <Footer/>
             </>

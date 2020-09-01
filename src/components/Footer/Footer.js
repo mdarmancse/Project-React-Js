@@ -6,6 +6,7 @@ import {faFacebook, faYoutube} from "@fortawesome/free-brands-svg-icons";
 import {Link} from "react-router-dom";
 import RestClient from "../../RestApi/RestClient";
 import AppUrl from "../../RestApi/AppUrl";
+import Loading from "../Loading/Loading";
 
 class Footer extends Component {
     constructor() {
@@ -16,7 +17,9 @@ class Footer extends Component {
             phone:'...',
             facebook:'...',
             youtube:'...',
-            footer_credit:'...'
+            footer_credit:'...',
+            loaderClass:'text-center',
+            mainDiv:'d-none',
 
         }
     }
@@ -30,6 +33,8 @@ class Footer extends Component {
                 facebook:result[0]['facebook'],
                 youtube:result[0]['youtube'],
                 footer_credit:result[0]['footer_credit'],
+                loaderClass:'d-none',
+                mainDiv:'p-5 text-justify'
             })
         })
 
@@ -47,12 +52,16 @@ class Footer extends Component {
 
                         </Col>
 
-                        <Col lg={3} md={6} sm={6} className="p-5 text-justify">
+                        <Col lg={3} md={6} sm={6} className={this.state.loaderClass}>
+                            <h1 className="serviceName">Address</h1>
+                          <Loading/>
+
+                        </Col>
+                        <Col lg={3} md={6} sm={6} className={this.state.mainDiv}>
                             <h1 className="serviceName">Address</h1>
                             <p className="serviceDes"> <FontAwesomeIcon className="" icon={faMapMarkedAlt} /> {this.state.address}</p>
                             <p className="serviceDes">  <FontAwesomeIcon className="" icon={faEnvelope} /> {this.state.email}</p>
                             <p className="serviceDes">  <FontAwesomeIcon className="" icon={faPhone} /> {this.state.phone}</p>
-
 
                         </Col>
 

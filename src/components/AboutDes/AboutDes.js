@@ -4,41 +4,51 @@ import RestClient from "../../RestApi/RestClient";
 import AppUrl from "../../RestApi/AppUrl";
 import {Link} from "react-router-dom";
 import ReactHtmlParser from 'react-html-parser';
+import Loading from "../Loading/Loading";
 
 class AboutDes extends Component {
 
     constructor() {
         super();
         this.state={
-            data:'...'
+            data:'...',
+            loading:true
 
         }
     }
 
     componentDidMount() {
         RestClient.GetRequest(AppUrl.information).then(result=>{
-            this.setState({data:result[0]['about']})
+            this.setState({data:result[0]['about'],loading:false})
         })
 
     }
     render() {
+        if(this.state.loading==true){
 
-        return (
-            <>
-                <Container className="mt-5">
-                    <Row>
-                        <Col lg={12} md={12} sm={12} className="serviceDes">
-                            {ReactHtmlParser(this.state.data)}
+            return <Loading/>
 
-                        </Col>
+        }else {
+            return (
+                <>
+                    <Container className="mt-5">
+                        <Row>
+                            <Col lg={12} md={12} sm={12} className="serviceDes">
+                                {ReactHtmlParser(this.state.data)}
 
-                    </Row>
+                            </Col>
+
+                        </Row>
 
 
-                </Container>
+                    </Container>
 
-            </>
-        );
+                </>
+            );
+        }
+
+
+
     }
 }
 

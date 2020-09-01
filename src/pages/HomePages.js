@@ -11,6 +11,8 @@ import ClientReview from "../components/ClientReview/ClientReview";
 import Footer from "../components/Footer/Footer";
 
 class HomePages extends Component {
+
+
     componentDidMount() {
         window.scroll(0,0)
     }
@@ -18,7 +20,7 @@ class HomePages extends Component {
     render() {
         return (
             <>
-                <TopNavigation title="Home"/>
+             <TopNavigation title="Home"/>
                 <TopBanner/>
                 <Services/>
                 <Analysis/>
