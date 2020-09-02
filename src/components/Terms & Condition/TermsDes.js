@@ -4,29 +4,42 @@ import RestClient from "../../RestApi/RestClient";
 import AppUrl from "../../RestApi/AppUrl";
 import ReactHtmlParser from "react-html-parser";
 import Loading from "../Loading/Loading";
+import Error from "../Error/Error";
 
 class TermsDes extends Component {
     constructor() {
         super();
         this.state={
             data:'...',
-            loading:true
+            loading:true,
+            error: false
 
         }
     }
 
     componentDidMount() {
         RestClient.GetRequest(AppUrl.information).then(result=>{
-            this.setState({data:result[0]['terms'],loading:false})
+            if (result == null) {
+                this.setState({error: true,loading:false})
+
+            } else {
+                this.setState({data:result[0]['terms'],loading:false})
+            }
+
+
+
+        }).catch(error=>{
+            this.setState({error:true,loading:false})
         })
+
 
     }
     render() {
-        if(this.state.loading==true){
+        if(this.state.loading==true && this.state.error == false){
 
             return <Loading/>
 
-        }else {
+        }else if (this.state.loading == false && this.state.error == false) {
             return (
                 <>
                     <Container className="mt-5">
@@ -43,6 +56,8 @@ class TermsDes extends Component {
 
                 </>
             );
+        }else if (this.state.error == true) {
+            return <Error/>
         }
 
 

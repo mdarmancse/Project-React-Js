@@ -5,6 +5,7 @@ import axios from 'axios';
 import RestClient from "../../RestApi/RestClient";
 import AppUrl from "../../RestApi/AppUrl";
 import Loading from "../Loading/Loading";
+import Error from "../Error/Error";
 
 class TopBanner extends Component {
 
@@ -17,17 +18,24 @@ class TopBanner extends Component {
             subtitle:'',
                 loaderClass:'text-center',
                 mainDiv:'d-none',
+                error:'text-center'
+
         }
     }
 
     componentDidMount() {
 
       RestClient.GetRequest(AppUrl.homeTop).then(result=>{
+          if(result==null){
+              this.setState({ error:'text-center',loaderClass:'d-none'})
+          }else {
+              this.setState({title:result[0]['home_title'],subtitle:result[0]['home_subtitle'],loaderClass:'d-none',mainDiv:'text-center',  error:'d-none'});
+          }
 
-          this.setState({title:result[0]['home_title'],subtitle:result[0]['home_subtitle'],loaderClass:'d-none',mainDiv:'text-center'});
+
 
       }).catch(error=>{
-          this.setState({title:"????",subtitle:"????"})
+          this.setState({ error:'text-center',loaderClass:'d-none'})
       })
     }
 
@@ -38,6 +46,9 @@ class TopBanner extends Component {
                     <div className="topBannerOverlay">
                         <Container className="topContent">
                             <Row>
+                                <Col className={this.state.error}>
+                                    <Error/>
+                                </Col>
                                 <Col className={this.state.loaderClass}>
                                     <Loading/>
                                 </Col>

@@ -7,6 +7,7 @@ import ReactHtmlParser from "react-html-parser";
 import RestClient from "../../RestApi/RestClient";
 import AppUrl from "../../RestApi/AppUrl";
 import Loading from "../Loading/Loading";
+import Error from "../Error/Error";
 
 class CourseDetails extends Component {
 
@@ -31,30 +32,35 @@ class CourseDetails extends Component {
 
     componentDidMount() {
         RestClient.GetRequest(AppUrl.courseDetails+this.state.myCourseID).then(result=>{
+            if (result == null) {
+                this.setState({error: true,loading:false})
 
-            this.setState({
-                long_title:result[0]['long_title'],
-                long_des:result[0]['long_des'],
-                total_lecture:result[0]['total_lecture'],
-                total_student:result[0]['total_student'],
-                skill_all:result[0]['skill_all'],
-                short_des:result[0]['short_des'],
-                video_url:result[0]['video_url'],
-                moreInfo:result[0]['courses_link'],
-                loading:false
-            })
+            }else {
+                this.setState({
+                    long_title:result[0]['long_title'],
+                    long_des:result[0]['long_des'],
+                    total_lecture:result[0]['total_lecture'],
+                    total_student:result[0]['total_student'],
+                    skill_all:result[0]['skill_all'],
+                    short_des:result[0]['short_des'],
+                    video_url:result[0]['video_url'],
+                    moreInfo:result[0]['courses_link'],
+                    loading:false
+                })
+            }
+
 
         }).catch(error=>{
-
+            this.setState({error:true,loading:false})
         })
     }
 
     render() {
-        if(this.state.loading==true){
+        if(this.state.loading==true && this.state.error == false){
 
             return <Loading/>
 
-        }else {
+        } else if (this.state.loading == false && this.state.error == false)  {
             return (
                 <>
                     <Container fluid={true} className="topFixedPage p-0">
@@ -104,6 +110,8 @@ class CourseDetails extends Component {
 
                 </>
             );
+        }else if (this.state.error == true) {
+            return <Error/>
         }
 
 

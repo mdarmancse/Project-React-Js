@@ -7,6 +7,7 @@ import {Col, Container, Row} from "react-bootstrap";
 import RestClient from "../../RestApi/RestClient";
 import AppUrl from "../../RestApi/AppUrl";
 import Loading from "../Loading/Loading";
+import Error from "../Error/Error";
 
 class ClientReview extends Component {
 
@@ -14,26 +15,35 @@ class ClientReview extends Component {
         super();
         this.state={
             myData:[],
-            loading:true
+            loading:true,
+            error: false
         }
     }
 
     componentDidMount() {
         RestClient.GetRequest(AppUrl.clientReview).then(result=>{
 
-            this.setState({myData:result,loading:false});
+            if (result == null) {
+                this.setState({error: true,loading:false})
 
+            } else {
+                this.setState({myData: result, loading: false})
+            }
+
+
+        }).catch(error=>{
+            this.setState({error:true,loading:false})
         })
     }
 
 
     render() {
 
-        if(this.state.loading==true){
+        if(this.state.loading==true && this.state.error == false){
 
             return <Loading/>
 
-        }else {
+        }else if (this.state.loading == false && this.state.error == false) {
             var settings = {
                 autoplay:true,
                 autoplaySpeed: 2000,
@@ -103,6 +113,8 @@ class ClientReview extends Component {
 
                 </>
             );
+        }else if (this.state.error == true) {
+            return <Error/>
         }
 
 

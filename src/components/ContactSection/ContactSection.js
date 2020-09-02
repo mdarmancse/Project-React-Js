@@ -5,6 +5,7 @@ import {faEnvelope, faMapMarkedAlt, faPhone} from "@fortawesome/free-solid-svg-i
 import RestClient from "../../RestApi/RestClient";
 import AppUrl from "../../RestApi/AppUrl";
 import Loading from "../Loading/Loading";
+import Error from "../Error/Error";
 
 class ContactSection extends Component {
     constructor() {
@@ -13,7 +14,8 @@ class ContactSection extends Component {
             address:'...',
             email:'...',
             phone:'...',
-            loading:true
+            loading:true,
+            error: false
 
 
 
@@ -22,13 +24,21 @@ class ContactSection extends Component {
 
     componentDidMount() {
         RestClient.GetRequest(AppUrl.footer).then(result=>{
-            this.setState({
-                address:result[0]['address'],
-                email:result[0]['email'],
-                phone:result[0]['phone'],
-                loading:false
+            if (result == null) {
+                this.setState({error: true,loading:false})
 
-            })
+            }else {
+                this.setState({
+                    address:result[0]['address'],
+                    email:result[0]['email'],
+                    phone:result[0]['phone'],
+                    loading:false
+
+                })
+            }
+
+        }).catch(error=>{
+            this.setState({error:true,loading:false})
         })
 
     }
@@ -51,11 +61,11 @@ class ContactSection extends Component {
     }
     render() {
 
-        if(this.state.loading==true){
+        if(this.state.loading==true && this.state.error == false){
 
             return <Loading/>
 
-        }else {
+        }else if (this.state.loading == false && this.state.error == false) {
 
             return (
                 <>
@@ -103,6 +113,8 @@ class ContactSection extends Component {
                 </>
             );
 
+        }else if (this.state.error == true) {
+            return <Error/>
         }
 
     }

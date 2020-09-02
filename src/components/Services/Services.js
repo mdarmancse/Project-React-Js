@@ -6,31 +6,40 @@ import web from "../.././asset/images/web.svg";
 import RestClient from "../../RestApi/RestClient";
 import AppUrl from "../../RestApi/AppUrl";
 import Loading from "../Loading/Loading";
+import Error from "../Error/Error";
 
 class Services extends Component {
 constructor() {
     super();
     this.state={
         myData:[],
-        loading:true
+        loading:true,
+        error: false
     }
 }
 
 componentDidMount() {
     RestClient.GetRequest(AppUrl.services).then(result=>{
+        if (result == null) {
+            this.setState({error: true,loading:false})
 
-        this.setState({myData:result,loading:false});
+        }else{
+            this.setState({myData:result,loading:false});
+        }
 
+
+    }).catch(error=>{
+        this.setState({error:true,loading:false})
     })
 }
 
 
     render() {
-        if(this.state.loading==true){
+        if(this.state.loading==true  && this.state.error == false){
 
             return <Loading/>
 
-        }else {
+        }else if (this.state.loading == false && this.state.error == false) {
             const myList=this.state.myData;
             const myView=myList.map(myList=>{
                 return <Col lg={4} md={6} sm={12}>
@@ -58,6 +67,8 @@ componentDidMount() {
                 </>
             );
 
+        }else if (this.state.error == true) {
+            return <Error/>
         }
 
     }

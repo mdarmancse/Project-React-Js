@@ -7,6 +7,7 @@ import {Player,BigPlayButton} from 'video-react';
 import RestClient from "../../RestApi/RestClient";
 import AppUrl from "../../RestApi/AppUrl";
 import Loading from "../Loading/Loading";
+import Error from "../Error/Error";
 
 class Video extends Component {
     constructor() {
@@ -15,17 +16,26 @@ class Video extends Component {
             show:false,
             video_des:'',
             video_url:'',
-            loading:true
+            loading:true,
+            error: false
         }
     }
     componentDidMount() {
         RestClient.GetRequest(AppUrl.video).then(result=>{
-            this.setState({
-                video_des:result[0]['video_des'],
-                video_url:result[0]['video_url'],
-                loading:false
+            if (result == null) {
+                this.setState({error: true,loading:false})
 
-            })
+            }else{
+                this.setState({
+                    video_des:result[0]['video_des'],
+                    video_url:result[0]['video_url'],
+                    loading:false
+
+                })
+            }
+
+        }).catch(error=>{
+            this.setState({error:true,loading:false})
         })
 
     }
@@ -34,11 +44,11 @@ class Video extends Component {
     modalOpen=()=>this.setState({show:true});
 
     render() {
-        if(this.state.loading==true){
+        if(this.state.loading==true  && this.state.error == false){
 
             return <Loading/>
 
-        }else {
+        }else if (this.state.loading == false && this.state.error == false)  {
             return (
                 <>
                     <Container>
@@ -78,6 +88,8 @@ class Video extends Component {
 
                 </>
             );
+        }else if (this.state.error == true) {
+            return <Error/>
         }
 
 

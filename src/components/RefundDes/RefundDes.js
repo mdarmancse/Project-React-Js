@@ -3,40 +3,65 @@ import {Col, Container, Row} from "react-bootstrap";
 import RestClient from "../../RestApi/RestClient";
 import AppUrl from "../../RestApi/AppUrl";
 import ReactHtmlParser from "react-html-parser";
+import Loading from "../Loading/Loading";
+import Error from "../Error/Error";
 
 class RefundDes extends Component {
     constructor() {
         super();
         this.state={
-            data:'...'
+            data:'...',
+            loading:true,
+            error: false
 
         }
     }
 
     componentDidMount() {
         RestClient.GetRequest(AppUrl.information).then(result=>{
-            this.setState({data:result[0]['refund']})
+            if (result == null) {
+                this.setState({error: true,loading:false})
+
+            } else {
+                this.setState({data:result[0]['refund'],loading:false})
+            }
+
+
+
+        }).catch(error=>{
+            this.setState({error:true,loading:false})
         })
+
 
     }
     render() {
+        if(this.state.loading==true && this.state.error == false){
 
-        return (
-            <>
-                <Container className="mt-5">
-                    <Row>
-                        <Col lg={12} md={12} sm={12} className="serviceDes">
-                            {ReactHtmlParser(this.state.data)}
+            return <Loading/>
 
-                        </Col>
+        }else if (this.state.loading == false && this.state.error == false) {
+            return (
+                <>
+                    <Container className="mt-5">
+                        <Row>
+                            <Col lg={12} md={12} sm={12} className="serviceDes">
+                                {ReactHtmlParser(this.state.data)}
 
-                    </Row>
+                            </Col>
+
+                        </Row>
 
 
-                </Container>
+                    </Container>
 
-            </>
-        );
+                </>
+            );
+        }else if (this.state.error == true) {
+            return <Error/>
+        }
+
+
+
     }
 }
 

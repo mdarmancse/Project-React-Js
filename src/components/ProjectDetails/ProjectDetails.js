@@ -4,6 +4,7 @@ import RestClient from "../../RestApi/RestClient";
 import AppUrl from "../../RestApi/AppUrl";
 import ReactHtmlParser from "react-html-parser";
 import Loading from "../Loading/Loading";
+import Error from "../Error/Error";
 
 class ProjectDetails extends Component {
     constructor(props) {
@@ -15,7 +16,8 @@ class ProjectDetails extends Component {
             short_des:'',
             project_feature:'',
             live_preview:'',
-            loading:true
+            loading:true,
+            error: false
 
         }
     }
@@ -23,26 +25,33 @@ class ProjectDetails extends Component {
 
         RestClient.GetRequest(AppUrl.projectDetails+this.state.myProjectID).then(result=>{
 
-            this.setState({
-                img_two:result[0]['img_two'],
-                project_name:result[0]['project_name'],
-                short_des:result[0]['short_des'],
-                project_feature:result[0]['project_feature'],
-                live_preview:result[0]['live_preview'],
-                loading:false
-            })
+            if (result == null) {
+                this.setState({error: true,loading:false})
+
+            }else{
+                this.setState({
+                    img_two:result[0]['img_two'],
+                    project_name:result[0]['project_name'],
+                    short_des:result[0]['short_des'],
+                    project_feature:result[0]['project_feature'],
+                    live_preview:result[0]['live_preview'],
+                    loading:false
+                })
+            }
+
+
 
         }).catch(error=>{
-
+            this.setState({error:true,loading:false})
         })
     }
     render() {
 
-        if(this.state.loading==true){
+        if(this.state.loading==true && this.state.error == false){
 
             return <Loading/>
 
-        }else {
+        }else if (this.state.loading == false && this.state.error == false) {
             return (
                 <>
                     <Container className="mt-5">
@@ -64,6 +73,8 @@ class ProjectDetails extends Component {
                     </Container>
                 </>
             );
+        }else if (this.state.error == true) {
+            return <Error/>
         }
 
     }

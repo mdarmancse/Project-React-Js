@@ -5,6 +5,7 @@ import RestClient from "../../RestApi/RestClient";
 import AppUrl from "../../RestApi/AppUrl";
 import ReactHtmlParser from 'react-html-parser';
 import Loading from "../Loading/Loading";
+import Error from "../Error/Error";
 class Analysis extends Component {
 
     constructor() {
@@ -12,29 +13,50 @@ class Analysis extends Component {
         this.state={
             myData:[],
             techDes:'...',
-            loading:true
+            loading:true,
+            error: false
 
         }
     }
 
     componentDidMount() {
         RestClient.GetRequest(AppUrl.chartData).then(result=>{
-            this.setState({myData:result,loading:false})
+            if (result == null) {
+                this.setState({error: true,loading:false})
+
+            } else {
+                this.setState({myData: result, loading: false})
+            }
+
+
+        }).catch(error=>{
+            this.setState({error:true,loading:false})
+
         });
 
+
         RestClient.GetRequest(AppUrl.techDes).then(result=>{
-            this.setState({techDes:result[0]['tech_des'],loading:false})
-        })
+            if (result == null) {
+                this.setState({error: true})
+
+            } else{
+                this.setState({techDes:result[0]['tech_des']})
+            }
+
+        }).catch(error=>{
+            this.setState({error:true})
+
+        });
 
     }
 
     render() {
        var blue= "rgba(0, 115, 230, 0.7)";
-        if(this.state.loading==true){
+        if(this.state.loading==true && this.state.error == false){
 
             return <Loading/>
 
-        }else {
+        }else if (this.state.loading == false && this.state.error == false) {
             return (
                 <>
                     <Container className="text-center">
@@ -67,7 +89,10 @@ class Analysis extends Component {
 
                 </>
             );
+        }else if (this.state.error == true) {
+            return <Error/>
         }
+
 
     }
 }
