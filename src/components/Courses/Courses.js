@@ -42,14 +42,14 @@ class Courses extends Component {
         }else if (this.state.loading == false && this.state.error == false) {
             const myList=this.state.myData;
             const myView=myList.map(myList=>{
-                return    <Col lg={6} md={12} sm={12} className="p-2">
-                    <Row>
-                        <Col lg={6} md={6} sm={12}>
+                return    <Col lg={6} md={12} sm={12} className="p-3">
+                    <Row className="p-3">
+                        <Col lg={6} md={6} sm={12} className="p-2">
                             <img className="courseImg" src={myList.small_img}/>
 
                         </Col>
 
-                        <Col lg={6} md={6} sm={12}>
+                        <Col lg={6} md={6} sm={12} className="p-2">
 
                             <h5 className="projectCardTitle text-justify">{myList.short_title}</h5>
                             <p className="projectCardDes text-justify">{myList.short_des}</p>

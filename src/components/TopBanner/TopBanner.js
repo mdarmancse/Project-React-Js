@@ -18,7 +18,7 @@ class TopBanner extends Component {
             subtitle:'',
                 loaderClass:'text-center',
                 mainDiv:'d-none',
-                error:'text-center'
+                error:'d-none'
 
         }
     }

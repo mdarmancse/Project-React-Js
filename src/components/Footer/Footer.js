@@ -40,7 +40,7 @@ class Footer extends Component {
                     youtube:result[0]['youtube'],
                     footer_credit:result[0]['footer_credit'],
                     loaderClass:'d-none',
-                    mainDiv:'p-5 text-justify'
+                    mainDiv:'p-4 text-justify'
                 })
             }
 
@@ -55,8 +55,9 @@ class Footer extends Component {
             return (
                 <>
                     <Container fluid={true} className="footer text-center">
+                        <Container>
                         <Row>
-                            <Col lg={3} md={6} sm={6} className="p-5 text-justify">
+                            <Col lg={3} md={6} sm={6} className="p-4 text-justify">
                                 <h1 className="serviceName">Follow Me</h1>
                                 <a className="socialLink" target='_blank' href={'//'+this.state.facebook}> <FontAwesomeIcon  icon={faFacebook} /> Facebook</a><br/>
                                 <a target='_blank' href={'//'+this.state.youtube} className="socialLink">  <FontAwesomeIcon icon={faYoutube} /> Youtube</a>
@@ -77,7 +78,7 @@ class Footer extends Component {
 
                             </Col>
 
-                            <Col lg={3} md={6} sm={6} className="p-5 text-justify">
+                            <Col lg={3} md={6} sm={6} className="p-4 text-justify">
                                 <h1 className="serviceName">Information</h1>
                                 <Link className="footerLink" to="/about">About me</Link><br/>
                                 <Link className="footerLink"  to="/contact">Contact me</Link>
@@ -85,7 +86,7 @@ class Footer extends Component {
 
                             </Col>
 
-                            <Col lg={3} md={6} sm={6} className="p-5 text-justify">
+                            <Col lg={3} md={6} sm={6} className="p-4 text-justify">
                                 <h1 className="serviceName">Legal</h1>
 
                                 <Link className="footerLink" to="/refund">Refund Policy</Link><br/>
@@ -102,7 +103,7 @@ class Footer extends Component {
                     <Container fluid={true} className="text-center copyRightSection">
 
                         <a className="copyRightLink" href="#">Md Arman Ullah &copy; 2020-2021</a>
-
+                    </Container>
                     </Container>
 
                 </>
