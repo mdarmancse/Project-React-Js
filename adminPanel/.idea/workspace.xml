@@ -59,7 +59,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="064237a7-5160-4b98-b75e-1812ca0e2779" name="Default Changelist" comment="" />
+    <list default="true" id="064237a7-5160-4b98-b75e-1812ca0e2779" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog8/app/Http/Controllers/ContactController.php" beforeDir="false" afterPath="$PROJECT_DIR$/blog8/app/Http/Controllers/ContactController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog8/public/js/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/blog8/public/js/Main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog8/resources/js/pages/ContactPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/blog8/resources/js/pages/ContactPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog8/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/blog8/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/RestApi/AppUrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/RestApi/AppUrl.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -225,6 +232,8 @@
       <workItem from="1605280020229" duration="3589000" />
       <workItem from="1605328236931" duration="15000" />
       <workItem from="1606483924723" duration="3281000" />
+      <workItem from="1612534610875" duration="5194000" />
+      <workItem from="1612586011111" duration="23000" />
     </task>
     <servers />
   </component>

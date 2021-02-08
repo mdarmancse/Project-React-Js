@@ -1,6 +1,6 @@
 class AppUrl {
 
-    static BaseUrl="http://127.0.0.1:8000";
+    static BaseUrl="https://back.mihdubai.com";
 
     static chartData=this.BaseUrl+'/chartData';
     static clientReview=this.BaseUrl+'/clientReview';

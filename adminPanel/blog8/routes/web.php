@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 //Route::put('user/{id}', [UserController::class, 'update']);
 
-Route::get('/contactList', [ContactController::class, 'ContactList']);
+Route::get('/contactList', [\App\Http\Controllers\ContactController::class, 'ContactList']);
+Route::post('/contactDelete', [\App\Http\Controllers\ContactController::class, 'ContactDelete']);
 
 
 
