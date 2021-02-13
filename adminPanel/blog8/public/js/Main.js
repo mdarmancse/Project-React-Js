@@ -71734,7 +71734,16 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEB
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_Menu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Menu */ "./resources/js/components/Menu.js");
+/* harmony import */ var react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap-table-next */ "./node_modules/react-bootstrap-table-next/lib/index.js");
+/* harmony import */ var react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_bootstrap_table2_paginator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap-table2-paginator */ "./node_modules/react-bootstrap-table2-paginator/lib/index.js");
+/* harmony import */ var react_bootstrap_table2_paginator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_table2_paginator__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_Menu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Menu */ "./resources/js/components/Menu.js");
+/* harmony import */ var _components_Loading_Loading__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Loading/Loading */ "./resources/js/components/Loading/Loading.js");
+/* harmony import */ var _components_Error_Error__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Error/Error */ "./resources/js/components/Error/Error.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -71760,21 +71769,166 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
+
+
+
+
 var ClientReviewPage = /*#__PURE__*/function (_Component) {
   _inherits(ClientReviewPage, _Component);
 
   var _super = _createSuper(ClientReviewPage);
 
-  function ClientReviewPage() {
+  function ClientReviewPage(props) {
+    var _this;
+
     _classCallCheck(this, ClientReviewPage);
 
-    return _super.apply(this, arguments);
+    _this = _super.call(this);
+    _this.state = {
+      dataList: [],
+      isLoading: true,
+      isError: false,
+      rowDataId: '',
+      deleteBtnText: "Delete"
+    };
+    _this.deleteData = _this.deleteData.bind(_assertThisInitialized(_this));
+    _this.imageFormat = _this.imageFormat.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(ClientReviewPage, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_6___default.a.get('/reviewList').then(function (response) {
+        if (response.status == 200) {
+          _this2.setState({
+            dataList: response.data,
+            isLoading: false,
+            isError: false
+          });
+        } else {
+          _this2.setState({
+            isLoading: false,
+            isError: true
+          });
+        }
+      })["catch"](function (error) {
+        _this2.setState({
+          isLoading: false,
+          isError: true
+        });
+      });
+    }
+  }, {
+    key: "deleteData",
+    value: function deleteData() {
+      var _this3 = this;
+
+      var confirmResult = confirm("Do you want to delete??");
+
+      if (confirmResult == true) {
+        this.setState({
+          deleteBtnText: "Deleteing..."
+        });
+        axios__WEBPACK_IMPORTED_MODULE_6___default.a.post('/reviewDelete', {
+          id: this.state.rowDataId
+        }).then(function (response) {
+          if (response.data =  true && response.status == 200) {
+            _this3.setState({
+              deleteBtnText: "Delete Success"
+            });
+
+            _this3.componentDidMount();
+
+            setTimeout(function () {
+              this.setState({
+                deleteBtnText: "Delete "
+              });
+            }.bind(_this3), 2000);
+          } else {
+            _this3.setState({
+              deleteBtnText: "Delete Failed"
+            });
+
+            setTimeout(function () {
+              this.setState({
+                deleteBtnText: "Delete "
+              });
+            }.bind(_this3), 2000);
+          }
+        })["catch"](function (error) {
+          _this3.setState({
+            deleteBtnText: "Delete Failed"
+          });
+
+          setTimeout(function () {
+            this.setState({
+              deleteBtnText: "Delete "
+            });
+          }.bind(_this3), 2000);
+        });
+      }
+    }
+  }, {
+    key: "imageFormat",
+    value: function imageFormat(cell, row) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "w-25",
+        src: cell
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Menu__WEBPACK_IMPORTED_MODULE_1__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Client Review")));
+      var _this4 = this;
+
+      if (this.state.isLoading == true) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Menu__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["Container"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Loading_Loading__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
+      } else if (this.state.isError == true) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Menu__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["Container"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Error_Error__WEBPACK_IMPORTED_MODULE_5__["default"], null)));
+      } else {
+        var data = this.state.dataList;
+        var columns = [{
+          dataField: 'id',
+          text: 'ID'
+        }, {
+          dataField: 'client_img',
+          text: 'Image',
+          formatter: this.imageFormat
+        }, {
+          dataField: 'client_title',
+          text: 'Name'
+        }, {
+          dataField: 'cliet_des',
+          text: 'Review'
+        }];
+        var selectRow = {
+          mode: 'radio',
+          onSelect: function onSelect(row, isSelect, rowIndex) {
+            _this4.setState({
+              rowDataId: row['id']
+            });
+          }
+        };
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Menu__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["Container"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["Col"], {
+          lg: 12,
+          md: 12,
+          sm: 6
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: this.deleteData,
+          className: "normal-btn my-2 btn"
+        }, this.state.deleteBtnText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_1___default.a, {
+          keyField: "id",
+          data: data,
+          columns: columns,
+          selectRow: selectRow,
+          pagination: react_bootstrap_table2_paginator__WEBPACK_IMPORTED_MODULE_2___default()()
+        }))))));
+      }
     }
   }]);
 
@@ -72002,7 +72156,16 @@ var ContactPage = /*#__PURE__*/function (_Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_Menu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Menu */ "./resources/js/components/Menu.js");
+/* harmony import */ var react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap-table-next */ "./node_modules/react-bootstrap-table-next/lib/index.js");
+/* harmony import */ var react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_bootstrap_table2_paginator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap-table2-paginator */ "./node_modules/react-bootstrap-table2-paginator/lib/index.js");
+/* harmony import */ var react_bootstrap_table2_paginator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_table2_paginator__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_Menu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Menu */ "./resources/js/components/Menu.js");
+/* harmony import */ var _components_Loading_Loading__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Loading/Loading */ "./resources/js/components/Loading/Loading.js");
+/* harmony import */ var _components_Error_Error__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Error/Error */ "./resources/js/components/Error/Error.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -72028,21 +72191,175 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
+
+
+
+
 var CoursesPage = /*#__PURE__*/function (_Component) {
   _inherits(CoursesPage, _Component);
 
   var _super = _createSuper(CoursesPage);
 
-  function CoursesPage() {
+  function CoursesPage(props) {
+    var _this;
+
     _classCallCheck(this, CoursesPage);
 
-    return _super.apply(this, arguments);
+    _this = _super.call(this);
+    _this.state = {
+      dataList: [],
+      isLoading: true,
+      isError: false,
+      rowDataId: '',
+      deleteBtnText: "Delete"
+    };
+    _this.deleteData = _this.deleteData.bind(_assertThisInitialized(_this));
+    _this.imageFormat = _this.imageFormat.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(CoursesPage, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_6___default.a.get('/courseList').then(function (response) {
+        if (response.status == 200) {
+          _this2.setState({
+            dataList: response.data,
+            isLoading: false,
+            isError: false
+          });
+        } else {
+          _this2.setState({
+            isLoading: false,
+            isError: true
+          });
+        }
+      })["catch"](function (error) {
+        _this2.setState({
+          isLoading: false,
+          isError: true
+        });
+      });
+    }
+  }, {
+    key: "deleteData",
+    value: function deleteData() {
+      var _this3 = this;
+
+      var confirmResult = confirm("Do you want to delete??");
+
+      if (confirmResult == true) {
+        this.setState({
+          deleteBtnText: "Deleteing..."
+        });
+        axios__WEBPACK_IMPORTED_MODULE_6___default.a.post('/courseDelete', {
+          id: this.state.rowDataId
+        }).then(function (response) {
+          if (response.data =  true && response.status == 200) {
+            _this3.setState({
+              deleteBtnText: "Delete Success"
+            });
+
+            _this3.componentDidMount();
+
+            setTimeout(function () {
+              this.setState({
+                deleteBtnText: "Delete "
+              });
+            }.bind(_this3), 2000);
+          } else {
+            _this3.setState({
+              deleteBtnText: "Delete Failed"
+            });
+
+            setTimeout(function () {
+              this.setState({
+                deleteBtnText: "Delete "
+              });
+            }.bind(_this3), 2000);
+          }
+        })["catch"](function (error) {
+          _this3.setState({
+            deleteBtnText: "Delete Failed"
+          });
+
+          setTimeout(function () {
+            this.setState({
+              deleteBtnText: "Delete "
+            });
+          }.bind(_this3), 2000);
+        });
+      }
+    }
+  }, {
+    key: "imageFormat",
+    value: function imageFormat(cell, row) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "w-75",
+        src: cell
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Menu__WEBPACK_IMPORTED_MODULE_1__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Courses")));
+      var _this4 = this;
+
+      if (this.state.isLoading == true) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Menu__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["Container"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Loading_Loading__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
+      } else if (this.state.isError == true) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Menu__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["Container"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Error_Error__WEBPACK_IMPORTED_MODULE_5__["default"], null)));
+      } else {
+        var data = this.state.dataList;
+        var columns = [{
+          dataField: 'id',
+          text: 'ID'
+        }, {
+          dataField: 'short_title',
+          text: 'Name'
+        }, {
+          dataField: 'short_des',
+          text: 'Description'
+        }, {
+          dataField: 'total_lecture',
+          text: 'Total Lecture'
+        }, {
+          dataField: 'total_student',
+          text: 'Total Student'
+        }, {
+          dataField: 'courses_link',
+          text: 'Link'
+        }, {
+          dataField: 'small_img',
+          text: 'Image',
+          formatter: this.imageFormat
+        }];
+        var selectRow = {
+          mode: 'radio',
+          onSelect: function onSelect(row, isSelect, rowIndex) {
+            _this4.setState({
+              rowDataId: row['id']
+            });
+          }
+        };
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Menu__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["Container"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["Col"], {
+          lg: 12,
+          md: 12,
+          sm: 6
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: this.deleteData,
+          className: "normal-btn my-2 btn"
+        }, this.state.deleteBtnText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_1___default.a, {
+          keyField: "id",
+          data: data,
+          columns: columns,
+          selectRow: selectRow,
+          pagination: react_bootstrap_table2_paginator__WEBPACK_IMPORTED_MODULE_2___default()()
+        }))))));
+      }
     }
   }]);
 
@@ -72126,7 +72443,16 @@ var HomePage = /*#__PURE__*/function (_Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_Menu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Menu */ "./resources/js/components/Menu.js");
+/* harmony import */ var react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap-table-next */ "./node_modules/react-bootstrap-table-next/lib/index.js");
+/* harmony import */ var react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_bootstrap_table2_paginator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap-table2-paginator */ "./node_modules/react-bootstrap-table2-paginator/lib/index.js");
+/* harmony import */ var react_bootstrap_table2_paginator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_table2_paginator__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_Menu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Menu */ "./resources/js/components/Menu.js");
+/* harmony import */ var _components_Loading_Loading__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Loading/Loading */ "./resources/js/components/Loading/Loading.js");
+/* harmony import */ var _components_Error_Error__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Error/Error */ "./resources/js/components/Error/Error.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -72152,21 +72478,169 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
+
+
+
+
 var ProjectsPage = /*#__PURE__*/function (_Component) {
   _inherits(ProjectsPage, _Component);
 
   var _super = _createSuper(ProjectsPage);
 
-  function ProjectsPage() {
+  function ProjectsPage(props) {
+    var _this;
+
     _classCallCheck(this, ProjectsPage);
 
-    return _super.apply(this, arguments);
+    _this = _super.call(this);
+    _this.state = {
+      dataList: [],
+      isLoading: true,
+      isError: false,
+      rowDataId: '',
+      deleteBtnText: "Delete"
+    };
+    _this.deleteData = _this.deleteData.bind(_assertThisInitialized(_this));
+    _this.imageFormat = _this.imageFormat.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(ProjectsPage, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_6___default.a.get('/projectList').then(function (response) {
+        if (response.status == 200) {
+          _this2.setState({
+            dataList: response.data,
+            isLoading: false,
+            isError: false
+          });
+        } else {
+          _this2.setState({
+            isLoading: false,
+            isError: true
+          });
+        }
+      })["catch"](function (error) {
+        _this2.setState({
+          isLoading: false,
+          isError: true
+        });
+      });
+    }
+  }, {
+    key: "deleteData",
+    value: function deleteData() {
+      var _this3 = this;
+
+      var confirmResult = confirm("Do you want to delete??");
+
+      if (confirmResult == true) {
+        this.setState({
+          deleteBtnText: "Deleteing..."
+        });
+        axios__WEBPACK_IMPORTED_MODULE_6___default.a.post('/projectDelete', {
+          id: this.state.rowDataId
+        }).then(function (response) {
+          if (response.data =  true && response.status == 200) {
+            _this3.setState({
+              deleteBtnText: "Delete Success"
+            });
+
+            _this3.componentDidMount();
+
+            setTimeout(function () {
+              this.setState({
+                deleteBtnText: "Delete "
+              });
+            }.bind(_this3), 2000);
+          } else {
+            _this3.setState({
+              deleteBtnText: "Delete Failed"
+            });
+
+            setTimeout(function () {
+              this.setState({
+                deleteBtnText: "Delete "
+              });
+            }.bind(_this3), 2000);
+          }
+        })["catch"](function (error) {
+          _this3.setState({
+            deleteBtnText: "Delete Failed"
+          });
+
+          setTimeout(function () {
+            this.setState({
+              deleteBtnText: "Delete "
+            });
+          }.bind(_this3), 2000);
+        });
+      }
+    }
+  }, {
+    key: "imageFormat",
+    value: function imageFormat(cell, row) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "w-75",
+        src: cell
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Menu__WEBPACK_IMPORTED_MODULE_1__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Projects")));
+      var _this4 = this;
+
+      if (this.state.isLoading == true) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Menu__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["Container"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Loading_Loading__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
+      } else if (this.state.isError == true) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Menu__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["Container"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Error_Error__WEBPACK_IMPORTED_MODULE_5__["default"], null)));
+      } else {
+        var data = this.state.dataList;
+        var columns = [{
+          dataField: 'id',
+          text: 'ID'
+        }, {
+          dataField: 'project_name',
+          text: 'Project Name'
+        }, {
+          dataField: 'project_feature',
+          text: 'Project Feature'
+        }, {
+          dataField: 'short_des',
+          text: 'Description'
+        }, {
+          dataField: 'img_one',
+          text: 'Image',
+          formatter: this.imageFormat
+        }];
+        var selectRow = {
+          mode: 'radio',
+          onSelect: function onSelect(row, isSelect, rowIndex) {
+            _this4.setState({
+              rowDataId: row['id']
+            });
+          }
+        };
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Menu__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["Container"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["Col"], {
+          lg: 12,
+          md: 12,
+          sm: 6
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: this.deleteData,
+          className: "normal-btn my-2 btn"
+        }, this.state.deleteBtnText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_1___default.a, {
+          keyField: "id",
+          data: data,
+          columns: columns,
+          selectRow: selectRow,
+          pagination: react_bootstrap_table2_paginator__WEBPACK_IMPORTED_MODULE_2___default()()
+        }))))));
+      }
     }
   }]);
 
@@ -72188,7 +72662,16 @@ var ProjectsPage = /*#__PURE__*/function (_Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_Menu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Menu */ "./resources/js/components/Menu.js");
+/* harmony import */ var react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap-table-next */ "./node_modules/react-bootstrap-table-next/lib/index.js");
+/* harmony import */ var react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_bootstrap_table2_paginator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap-table2-paginator */ "./node_modules/react-bootstrap-table2-paginator/lib/index.js");
+/* harmony import */ var react_bootstrap_table2_paginator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_table2_paginator__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_Menu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Menu */ "./resources/js/components/Menu.js");
+/* harmony import */ var _components_Loading_Loading__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Loading/Loading */ "./resources/js/components/Loading/Loading.js");
+/* harmony import */ var _components_Error_Error__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Error/Error */ "./resources/js/components/Error/Error.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -72214,21 +72697,166 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
+
+
+
+
 var ServicesPage = /*#__PURE__*/function (_Component) {
   _inherits(ServicesPage, _Component);
 
   var _super = _createSuper(ServicesPage);
 
-  function ServicesPage() {
+  function ServicesPage(props) {
+    var _this;
+
     _classCallCheck(this, ServicesPage);
 
-    return _super.apply(this, arguments);
+    _this = _super.call(this);
+    _this.state = {
+      dataList: [],
+      isLoading: true,
+      isError: false,
+      rowDataId: '',
+      deleteBtnText: "Delete"
+    };
+    _this.deleteData = _this.deleteData.bind(_assertThisInitialized(_this));
+    _this.imageFormat = _this.imageFormat.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(ServicesPage, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_6___default.a.get('/serviceList').then(function (response) {
+        if (response.status == 200) {
+          _this2.setState({
+            dataList: response.data,
+            isLoading: false,
+            isError: false
+          });
+        } else {
+          _this2.setState({
+            isLoading: false,
+            isError: true
+          });
+        }
+      })["catch"](function (error) {
+        _this2.setState({
+          isLoading: false,
+          isError: true
+        });
+      });
+    }
+  }, {
+    key: "deleteData",
+    value: function deleteData() {
+      var _this3 = this;
+
+      var confirmResult = confirm("Do you want to delete??");
+
+      if (confirmResult == true) {
+        this.setState({
+          deleteBtnText: "Deleteing..."
+        });
+        axios__WEBPACK_IMPORTED_MODULE_6___default.a.post('/serviceDelete', {
+          id: this.state.rowDataId
+        }).then(function (response) {
+          if (response.data =  true && response.status == 200) {
+            _this3.setState({
+              deleteBtnText: "Delete Success"
+            });
+
+            _this3.componentDidMount();
+
+            setTimeout(function () {
+              this.setState({
+                deleteBtnText: "Delete "
+              });
+            }.bind(_this3), 2000);
+          } else {
+            _this3.setState({
+              deleteBtnText: "Delete Failed"
+            });
+
+            setTimeout(function () {
+              this.setState({
+                deleteBtnText: "Delete "
+              });
+            }.bind(_this3), 2000);
+          }
+        })["catch"](function (error) {
+          _this3.setState({
+            deleteBtnText: "Delete Failed"
+          });
+
+          setTimeout(function () {
+            this.setState({
+              deleteBtnText: "Delete "
+            });
+          }.bind(_this3), 2000);
+        });
+      }
+    }
+  }, {
+    key: "imageFormat",
+    value: function imageFormat(cell, row) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "w-75",
+        src: cell
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Menu__WEBPACK_IMPORTED_MODULE_1__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Services")));
+      var _this4 = this;
+
+      if (this.state.isLoading == true) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Menu__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["Container"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Loading_Loading__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
+      } else if (this.state.isError == true) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Menu__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["Container"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Error_Error__WEBPACK_IMPORTED_MODULE_5__["default"], null)));
+      } else {
+        var data = this.state.dataList;
+        var columns = [{
+          dataField: 'id',
+          text: 'ID'
+        }, {
+          dataField: 'service_name',
+          text: 'Service Name'
+        }, {
+          dataField: 'service_des',
+          text: 'Description'
+        }, {
+          dataField: 'service_logo',
+          text: 'Logo',
+          formatter: this.imageFormat
+        }];
+        var selectRow = {
+          mode: 'radio',
+          onSelect: function onSelect(row, isSelect, rowIndex) {
+            _this4.setState({
+              rowDataId: row['id']
+            });
+          }
+        };
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Menu__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["Container"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["Col"], {
+          lg: 12,
+          md: 12,
+          sm: 6
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: this.deleteData,
+          className: "normal-btn my-2 btn"
+        }, this.state.deleteBtnText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_1___default.a, {
+          keyField: "id",
+          data: data,
+          columns: columns,
+          selectRow: selectRow,
+          pagination: react_bootstrap_table2_paginator__WEBPACK_IMPORTED_MODULE_2___default()()
+        }))))));
+      }
     }
   }]);
 
