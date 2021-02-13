@@ -14,7 +14,8 @@ class ContactPage extends Component {
             dataList:[],
             isLoading:true,
             isError:false,
-            rowDataId:''
+            rowDataId:'',
+            deleteBtnText:"Delete"
 
         }
         this.deleteData=this.deleteData.bind(this);
@@ -40,14 +41,40 @@ class ContactPage extends Component {
     }
 
     deleteData(){
+        let confirmResult=confirm("Do you want to delete??");
 
-        Axios.post('/contactDelete',{id:this.state.rowDataId}).then((response)=>{
+        if (confirmResult==true){
+            this.setState({deleteBtnText:"Deleteing..."})
 
-            this.componentDidMount();
-        }).catch((error)=>{
+            Axios.post('/contactDelete',{id:this.state.rowDataId}).then((response)=>{
+
+                if(response.data=1 && response.status==200){
+
+                    this.setState({deleteBtnText:"Delete Success"})
+                    this.componentDidMount();
+                    setTimeout(function () {
+                        this.setState({deleteBtnText:"Delete "})
+                    }.bind(this),2000)
+                }else{
+
+                    this.setState({deleteBtnText:"Delete Failed"})
+                    setTimeout(function () {
+                        this.setState({deleteBtnText:"Delete "})
+                    }.bind(this),2000)
+
+                }
 
 
-        })
+            }).catch((error)=>{
+                this.setState({deleteBtnText:"Delete Failed"})
+                setTimeout(function () {
+                    this.setState({deleteBtnText:"Delete "})
+                }.bind(this),2000)
+
+            })
+        }
+
+
     }
 
 
@@ -108,7 +135,7 @@ class ContactPage extends Component {
 
                             <Row>
                                 <Col lg={12} md={12} sm={6}>
-                                    <button onClick={this.deleteData} className='normal-btn my-2 btn'>Delete</button>
+                                    <button onClick={this.deleteData} className='normal-btn my-2 btn'>{this.state.deleteBtnText}</button>
                                     <BootstrapTable
                                         keyField='id'
                                         data={ data }

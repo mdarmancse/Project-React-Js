@@ -71852,7 +71852,8 @@ var ContactPage = /*#__PURE__*/function (_Component) {
       dataList: [],
       isLoading: true,
       isError: false,
-      rowDataId: ''
+      rowDataId: '',
+      deleteBtnText: "Delete"
     };
     _this.deleteData = _this.deleteData.bind(_assertThisInitialized(_this));
     return _this;
@@ -71888,11 +71889,50 @@ var ContactPage = /*#__PURE__*/function (_Component) {
     value: function deleteData() {
       var _this3 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_6___default.a.post('/contactDelete', {
-        id: this.state.rowDataId
-      }).then(function (response) {
-        _this3.componentDidMount();
-      })["catch"](function (error) {});
+      var confirmResult = confirm("Do you want to delete??");
+
+      if (confirmResult == true) {
+        this.setState({
+          deleteBtnText: "Deleteing..."
+        });
+        axios__WEBPACK_IMPORTED_MODULE_6___default.a.post('/contactDelete', {
+          id: this.state.rowDataId
+        }).then(function (response) {
+          if (response.data =  true && response.status == 200) {
+            _this3.setState({
+              deleteBtnText: "Delete Success"
+            });
+
+            _this3.componentDidMount();
+
+            setTimeout(function () {
+              this.setState({
+                deleteBtnText: "Delete "
+              });
+            }.bind(_this3), 2000);
+          } else {
+            _this3.setState({
+              deleteBtnText: "Delete Failed"
+            });
+
+            setTimeout(function () {
+              this.setState({
+                deleteBtnText: "Delete "
+              });
+            }.bind(_this3), 2000);
+          }
+        })["catch"](function (error) {
+          _this3.setState({
+            deleteBtnText: "Delete Failed"
+          });
+
+          setTimeout(function () {
+            this.setState({
+              deleteBtnText: "Delete "
+            });
+          }.bind(_this3), 2000);
+        });
+      }
     }
   }, {
     key: "render",
@@ -71933,7 +71973,7 @@ var ContactPage = /*#__PURE__*/function (_Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: this.deleteData,
           className: "normal-btn my-2 btn"
-        }, "Delete"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_1___default.a, {
+        }, this.state.deleteBtnText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_1___default.a, {
           keyField: "id",
           data: data,
           columns: columns,
