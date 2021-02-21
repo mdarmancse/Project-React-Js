@@ -6,6 +6,8 @@ import Loading from "../components/Loading/Loading";
 import Error from "../components/Error/Error";
 import Axios from "axios";
 import {Col, Container, Row,img} from "react-bootstrap";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 
 class ProjectsPage extends Component {
     constructor(props) {
@@ -15,11 +17,15 @@ class ProjectsPage extends Component {
             isLoading:true,
             isError:false,
             rowDataId:'',
-            deleteBtnText:"Delete"
+            deleteBtnText:"Delete",
+            newBtnText:"Add New",
+            AddNewModal:false,
 
         }
         this.deleteData=this.deleteData.bind(this);
         this.imageFormat=this.imageFormat.bind(this);
+        this.addNewModalOpen=this.addNewModalOpen.bind(this);
+        this.addNewModalClose=this.addNewModalClose.bind(this);
     }
 
     componentDidMount() {
@@ -87,6 +93,17 @@ class ProjectsPage extends Component {
 
 
     }
+    addNewModalOpen(){
+
+        this.setState({AddNewModal:true});
+
+
+    }
+
+    addNewModalClose(){
+        this.setState({AddNewModal:false});
+
+    }
 
 
 
@@ -147,6 +164,7 @@ class ProjectsPage extends Component {
                             <Row>
                                 <Col lg={12} md={12} sm={6}>
                                     <button onClick={this.deleteData} className='normal-btn my-2 btn'>{this.state.deleteBtnText}</button>
+                                    <button onClick={this.addNewModalOpen} className='normal-btn my-2 btn m-lg-2'>{this.state.newBtnText}</button>
                                     <BootstrapTable
                                         keyField='id'
                                         data={ data }
@@ -167,6 +185,21 @@ class ProjectsPage extends Component {
 
 
                     </Menu>
+
+                    <Modal show={this.state.AddNewModal} onHide={this.addNewModalClose}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Modal heading</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={this.addNewModalClose}>
+                                Close
+                            </Button>
+                            <Button variant="primary">
+                                Save Changes
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
 
                 </>
             );

@@ -71749,6 +71749,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/index.js");
+/* harmony import */ var react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-bootstrap/Modal */ "./node_modules/react-bootstrap/esm/Modal.js");
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/esm/Button.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -71780,6 +71782,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
 var ClientReviewPage = /*#__PURE__*/function (_Component) {
   _inherits(ClientReviewPage, _Component);
 
@@ -71796,10 +71800,14 @@ var ClientReviewPage = /*#__PURE__*/function (_Component) {
       isLoading: true,
       isError: false,
       rowDataId: '',
-      deleteBtnText: "Delete"
+      deleteBtnText: "Delete",
+      newBtnText: "Add New",
+      AddNewModal: false
     };
     _this.deleteData = _this.deleteData.bind(_assertThisInitialized(_this));
     _this.imageFormat = _this.imageFormat.bind(_assertThisInitialized(_this));
+    _this.addNewModalOpen = _this.addNewModalOpen.bind(_assertThisInitialized(_this));
+    _this.addNewModalClose = _this.addNewModalClose.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -71887,6 +71895,20 @@ var ClientReviewPage = /*#__PURE__*/function (_Component) {
       });
     }
   }, {
+    key: "addNewModalOpen",
+    value: function addNewModalOpen() {
+      this.setState({
+        AddNewModal: true
+      });
+    }
+  }, {
+    key: "addNewModalClose",
+    value: function addNewModalClose() {
+      this.setState({
+        AddNewModal: false
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this4 = this;
@@ -71928,13 +71950,26 @@ var ClientReviewPage = /*#__PURE__*/function (_Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: this.deleteData,
           className: "normal-btn my-2 btn"
-        }, this.state.deleteBtnText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_1___default.a, {
+        }, this.state.deleteBtnText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: this.addNewModalOpen,
+          className: "normal-btn my-2 btn m-lg-2"
+        }, this.state.newBtnText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_1___default.a, {
           keyField: "id",
           data: data,
           columns: columns,
           selectRow: selectRow,
           pagination: react_bootstrap_table2_paginator__WEBPACK_IMPORTED_MODULE_2___default()()
-        }))))));
+        }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          show: this.state.AddNewModal,
+          onHide: this.addNewModalClose
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__["default"].Header, {
+          closeButton: true
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__["default"].Title, null, "Modal heading")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__["default"].Body, null, "Woohoo, you're reading this text in a modal!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__["default"].Footer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
+          variant: "secondary",
+          onClick: this.addNewModalClose
+        }, "Close"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
+          variant: "primary"
+        }, "Save Changes"))));
       }
     }
   }]);
@@ -72179,6 +72214,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/index.js");
+/* harmony import */ var react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-bootstrap/Modal */ "./node_modules/react-bootstrap/esm/Modal.js");
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/esm/Button.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -72210,6 +72247,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
 var CoursesPage = /*#__PURE__*/function (_Component) {
   _inherits(CoursesPage, _Component);
 
@@ -72226,10 +72265,14 @@ var CoursesPage = /*#__PURE__*/function (_Component) {
       isLoading: true,
       isError: false,
       rowDataId: '',
-      deleteBtnText: "Delete"
+      deleteBtnText: "Delete",
+      newBtnText: "Add New",
+      AddNewModal: false
     };
     _this.deleteData = _this.deleteData.bind(_assertThisInitialized(_this));
     _this.imageFormat = _this.imageFormat.bind(_assertThisInitialized(_this));
+    _this.addNewModalOpen = _this.addNewModalOpen.bind(_assertThisInitialized(_this));
+    _this.addNewModalClose = _this.addNewModalClose.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -72317,6 +72360,20 @@ var CoursesPage = /*#__PURE__*/function (_Component) {
       });
     }
   }, {
+    key: "addNewModalOpen",
+    value: function addNewModalOpen() {
+      this.setState({
+        AddNewModal: true
+      });
+    }
+  }, {
+    key: "addNewModalClose",
+    value: function addNewModalClose() {
+      this.setState({
+        AddNewModal: false
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this4 = this;
@@ -72371,13 +72428,26 @@ var CoursesPage = /*#__PURE__*/function (_Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: this.deleteData,
           className: "normal-btn my-2 btn"
-        }, this.state.deleteBtnText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_1___default.a, {
+        }, this.state.deleteBtnText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: this.addNewModalOpen,
+          className: "normal-btn my-2 btn m-lg-2"
+        }, this.state.newBtnText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_1___default.a, {
           keyField: "id",
           data: data,
           columns: columns,
           selectRow: selectRow,
           pagination: react_bootstrap_table2_paginator__WEBPACK_IMPORTED_MODULE_2___default()()
-        }))))));
+        }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          show: this.state.AddNewModal,
+          onHide: this.addNewModalClose
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__["default"].Header, {
+          closeButton: true
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__["default"].Title, null, "Modal heading")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__["default"].Body, null, "Woohoo, you're reading this text in a modal!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__["default"].Footer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
+          variant: "secondary",
+          onClick: this.addNewModalClose
+        }, "Close"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
+          variant: "primary"
+        }, "Save Changes"))));
       }
     }
   }]);
@@ -72584,6 +72654,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/index.js");
+/* harmony import */ var react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-bootstrap/Modal */ "./node_modules/react-bootstrap/esm/Modal.js");
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/esm/Button.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -72615,6 +72687,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
 var ProjectsPage = /*#__PURE__*/function (_Component) {
   _inherits(ProjectsPage, _Component);
 
@@ -72631,10 +72705,14 @@ var ProjectsPage = /*#__PURE__*/function (_Component) {
       isLoading: true,
       isError: false,
       rowDataId: '',
-      deleteBtnText: "Delete"
+      deleteBtnText: "Delete",
+      newBtnText: "Add New",
+      AddNewModal: false
     };
     _this.deleteData = _this.deleteData.bind(_assertThisInitialized(_this));
     _this.imageFormat = _this.imageFormat.bind(_assertThisInitialized(_this));
+    _this.addNewModalOpen = _this.addNewModalOpen.bind(_assertThisInitialized(_this));
+    _this.addNewModalClose = _this.addNewModalClose.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -72722,6 +72800,20 @@ var ProjectsPage = /*#__PURE__*/function (_Component) {
       });
     }
   }, {
+    key: "addNewModalOpen",
+    value: function addNewModalOpen() {
+      this.setState({
+        AddNewModal: true
+      });
+    }
+  }, {
+    key: "addNewModalClose",
+    value: function addNewModalClose() {
+      this.setState({
+        AddNewModal: false
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this4 = this;
@@ -72761,13 +72853,26 @@ var ProjectsPage = /*#__PURE__*/function (_Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: this.deleteData,
           className: "normal-btn my-2 btn"
-        }, this.state.deleteBtnText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_1___default.a, {
+        }, this.state.deleteBtnText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: this.addNewModalOpen,
+          className: "normal-btn my-2 btn m-lg-2"
+        }, this.state.newBtnText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_1___default.a, {
           keyField: "id",
           data: data,
           columns: columns,
           selectRow: selectRow,
           pagination: react_bootstrap_table2_paginator__WEBPACK_IMPORTED_MODULE_2___default()()
-        }))))));
+        }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          show: this.state.AddNewModal,
+          onHide: this.addNewModalClose
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__["default"].Header, {
+          closeButton: true
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__["default"].Title, null, "Modal heading")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__["default"].Body, null, "Woohoo, you're reading this text in a modal!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__["default"].Footer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
+          variant: "secondary",
+          onClick: this.addNewModalClose
+        }, "Close"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
+          variant: "primary"
+        }, "Save Changes"))));
       }
     }
   }]);
@@ -72800,6 +72905,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/index.js");
+/* harmony import */ var react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-bootstrap/Modal */ "./node_modules/react-bootstrap/esm/Modal.js");
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/esm/Button.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -72831,6 +72938,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
 var ServicesPage = /*#__PURE__*/function (_Component) {
   _inherits(ServicesPage, _Component);
 
@@ -72847,10 +72956,14 @@ var ServicesPage = /*#__PURE__*/function (_Component) {
       isLoading: true,
       isError: false,
       rowDataId: '',
-      deleteBtnText: "Delete"
+      deleteBtnText: "Delete",
+      newBtnText: "Add New",
+      AddNewModal: false
     };
     _this.deleteData = _this.deleteData.bind(_assertThisInitialized(_this));
     _this.imageFormat = _this.imageFormat.bind(_assertThisInitialized(_this));
+    _this.addNewModalOpen = _this.addNewModalOpen.bind(_assertThisInitialized(_this));
+    _this.addNewModalClose = _this.addNewModalClose.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -72938,6 +73051,20 @@ var ServicesPage = /*#__PURE__*/function (_Component) {
       });
     }
   }, {
+    key: "addNewModalOpen",
+    value: function addNewModalOpen() {
+      this.setState({
+        AddNewModal: true
+      });
+    }
+  }, {
+    key: "addNewModalClose",
+    value: function addNewModalClose() {
+      this.setState({
+        AddNewModal: false
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this4 = this;
@@ -72983,13 +73110,26 @@ var ServicesPage = /*#__PURE__*/function (_Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: this.deleteData,
           className: "normal-btn my-2 btn"
-        }, this.state.deleteBtnText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_1___default.a, {
+        }, this.state.deleteBtnText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: this.addNewModalOpen,
+          className: "normal-btn my-2 btn m-lg-2"
+        }, this.state.newBtnText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_1___default.a, {
           keyField: "id",
           data: data,
           columns: columns,
           selectRow: selectRow,
           pagination: react_bootstrap_table2_paginator__WEBPACK_IMPORTED_MODULE_2___default()()
-        }))))));
+        }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          show: this.state.AddNewModal,
+          onHide: this.addNewModalClose
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__["default"].Header, {
+          closeButton: true
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__["default"].Title, null, "Modal heading")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__["default"].Body, null, "Woohoo, you're reading this text in a modal!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__["default"].Footer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
+          variant: "secondary",
+          onClick: this.addNewModalClose
+        }, "Close"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
+          variant: "primary"
+        }, "Save Changes"))));
       }
     }
   }]);
