@@ -126,7 +126,6 @@ class ProjectsPage extends Component {
 
                 {dataField:'id',text:'ID'},
                 {dataField:'project_name',text:'Project Name'},
-                {dataField:'project_feature',text:'Project Feature'},
                 {dataField:'short_des',text:'Description'},
                 {dataField:'img_one',text:'Image',formatter:this.imageFormat},
             ];

@@ -138,7 +138,7 @@ class ClientReviewPage extends Component {
 
             return (
                 <>
-                    <Menu>
+                    <Menu title="Review">
                         <Container>
 
 

@@ -94,7 +94,7 @@ class ServicesPage extends Component {
 
         if (this.state.isLoading==true){
             return(
-                <Menu>
+                <Menu title="Services">
                     <Container>
                         <Loading/>
                     </Container>
@@ -107,7 +107,7 @@ class ServicesPage extends Component {
             return(
 
 
-                <Menu>
+                <Menu title="Services">
                     <Container>
                         <Error/>
                     </Container>
@@ -137,7 +137,7 @@ class ServicesPage extends Component {
 
             return (
                 <>
-                    <Menu>
+                    <Menu title="Services">
                         <Container>
 
 

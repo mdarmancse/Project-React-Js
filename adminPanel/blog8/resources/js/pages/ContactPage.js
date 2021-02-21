@@ -86,7 +86,7 @@ class ContactPage extends Component {
 
         if (this.state.isLoading==true){
             return(
-                <Menu>
+                <Menu title="Contact">
                     <Container>
                         <Loading/>
                     </Container>
@@ -99,7 +99,7 @@ class ContactPage extends Component {
             return(
 
 
-            <Menu>
+            <Menu title="Contact">
                 <Container>
                     <Error/>
                 </Container>
@@ -129,7 +129,7 @@ class ContactPage extends Component {
 
             return (
                 <>
-                    <Menu>
+                    <Menu title="Contact">
                         <Container>
 
 

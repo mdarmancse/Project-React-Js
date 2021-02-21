@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Navbar,NavLink} from "react-bootstrap";
+import {Navbar,NavLink,title} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBars, faHome} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
@@ -33,6 +33,7 @@ class Menu extends Component {
     render() {
         return (
             <>
+                <title>{this.props.title}</title>
                 <Navbar expand='lg' className="fixed-top" varient='light' bg='light'>
                     <Navbar.Brand onClick={this.showHideSideNav}><FontAwesomeIcon icon={faBars}/></Navbar.Brand>
                 </Navbar>
@@ -44,6 +45,7 @@ class Menu extends Component {
                          <NavLink><Link className="my-0 p-2 text-white" to="/project"><FontAwesomeIcon icon={faHome}/>Projects </Link></NavLink>
                          <NavLink><Link className="my-0 p-2 text-white" to="/review"><FontAwesomeIcon icon={faHome}/>Client Review </Link></NavLink>
                         <NavLink> <Link className="my-0 p-2 text-white" to="/contact"><FontAwesomeIcon icon={faHome}/>Contact </Link></NavLink>
+                       <a className="my-0 p-2 text-white" href="/logout"><FontAwesomeIcon icon={faHome}/>Logout </a>
 
 
                     </div>
