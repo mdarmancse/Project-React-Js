@@ -170,7 +170,7 @@ class ClientReviewPage extends Component {
         });
 
 
-
+        event.preventDefault();
 
 
     }

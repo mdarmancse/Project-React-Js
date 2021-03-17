@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="{{asset('css/sideNav.css')}}">
     <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/react-quill@1.3.3/dist/quill.snow.css">
+    <title>Admin Panel</title>
 </head>
 <body>
 <div id="root"></div>

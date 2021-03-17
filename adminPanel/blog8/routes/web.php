@@ -37,7 +37,7 @@ Route::post('/serviceDelete', [\App\Http\Controllers\ServiceController::class, '
 //project list
 Route::get('/projectList', [\App\Http\Controllers\ProjectController::class, 'ProjectList'])->middleware('loginCheck');
 Route::post('/projectDelete', [\App\Http\Controllers\ProjectController::class, 'ProjectDelete'])->middleware('loginCheck');
-
+Route::post('/projectAdd', [\App\Http\Controllers\ProjectController::class, 'AddProject'])->middleware('loginCheck');
 //review list
 Route::get('/reviewList', [\App\Http\Controllers\ReviewController::class, 'ReviewList'])->middleware('loginCheck');
 Route::post('/reviewDelete', [\App\Http\Controllers\ReviewController::class, 'ReviewDelete'])->middleware('loginCheck');
