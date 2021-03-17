@@ -19,4 +19,31 @@ class ServiceController extends Controller
         return $result;
 
     }
+
+    function AddService(Request $request)
+    {
+
+        $title = $request->input('service_name');
+        $des = $request->input('service_des');
+        $photoPath = $request->file('service_logo')->store('Public');
+        $photoName = explode("/", $photoPath)[1];
+
+
+        $photoUrl ="/storage/" . $photoName;
+        $result = ServicesModel::insert([
+
+            'service_name' => $title,
+            'service_des' => $des,
+            'service_logo' => $photoUrl
+
+        ]);
+
+        if ($result = true) {
+            return 1;
+        } else {
+            return 0;
+        }
+        //  return $result;
+
+    }
 }

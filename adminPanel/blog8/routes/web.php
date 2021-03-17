@@ -33,6 +33,7 @@ Route::post('/courseDelete', [\App\Http\Controllers\CourseController::class, 'Co
 //service list
 Route::get('/serviceList', [\App\Http\Controllers\ServiceController::class, 'ServiceList'])->middleware('loginCheck');
 Route::post('/serviceDelete', [\App\Http\Controllers\ServiceController::class, 'ServiceDelete'])->middleware('loginCheck');
+Route::post('/serviceAdd', [\App\Http\Controllers\ServiceController::class, 'AddService'])->middleware('loginCheck');
 
 //project list
 Route::get('/projectList', [\App\Http\Controllers\ProjectController::class, 'ProjectList'])->middleware('loginCheck');

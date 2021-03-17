@@ -5,7 +5,7 @@ import Menu from "../components/Menu";
 import Loading from "../components/Loading/Loading";
 import Error from "../components/Error/Error";
 import Axios from "axios";
-import {Col, Container, img, Row} from "react-bootstrap";
+import {Col, Container, Form, img, Row} from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
@@ -20,12 +20,40 @@ class ServicesPage extends Component {
             deleteBtnText:"Delete",
             newBtnText:"Add New",
             AddNewModal:false,
+            addTitle:'',
+            addDes:'',
+            addFile:'',
 
         }
         this.deleteData=this.deleteData.bind(this);
         this.imageFormat=this.imageFormat.bind(this);
         this.addNewModalOpen=this.addNewModalOpen.bind(this);
         this.addNewModalClose=this.addNewModalClose.bind(this);
+        this.fileOnChange=this.fileOnChange.bind(this);
+        this.titleOnChange=this.titleOnChange.bind(this);
+        this.desOnChange=this.desOnChange.bind(this);
+        this.addFormSubmit=this.addFormSubmit.bind(this);
+    }
+
+    //Form dATA pULL
+    titleOnChange(event){
+
+        let title=event.target.value;
+        this.setState({addTitle:title});
+
+
+    }
+
+    desOnChange(event){
+
+        let des=event.target.value;
+        this.setState({addDes:des});
+
+    }
+    fileOnChange(event){
+        let photo=event.target.files[0];
+        this.setState({addFile:photo});
+
     }
 
     componentDidMount() {
@@ -43,6 +71,45 @@ class ServicesPage extends Component {
         }).catch((error)=>{
             this.setState({isLoading:false,isError:true});
         })
+
+
+    }
+    addFormSubmit(event){
+        event.preventDefault();
+
+        let title=this.state.addTitle;
+        let des=this.state.addDes;
+        let photo=this.state.addFile;
+
+        let url="/serviceAdd";
+
+        let formData=new FormData();
+        formData.append('service_name',title);
+        formData.append('service_des',des);
+        formData.append('service_logo',photo);
+
+        let config={
+            headers:{'content-type':'multipart/form-data'}
+
+        }
+
+        Axios.post(url,formData,config).then((response)=> {
+
+            if(response.data==1){
+
+                this.addNewModalClose();
+                this.componentDidMount();
+
+            }
+
+        }).catch(function (error) {
+
+            alert(error);
+
+        });
+
+
+
 
 
     }
@@ -185,15 +252,34 @@ class ServicesPage extends Component {
 
                     <Modal show={this.state.AddNewModal} onHide={this.addNewModalClose}>
                         <Modal.Header closeButton>
-                            <Modal.Title>Modal heading</Modal.Title>
+                            <Modal.Title><h6>Add Service</h6></Modal.Title>
                         </Modal.Header>
-                        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                        <Modal.Body>
+                            <Form onSubmit={this.addFormSubmit}>
+                                <Form.Group >
+                                    <Form.Label>Service Title</Form.Label>
+                                    <Form.Control onChange={this.titleOnChange} type="text" placeholder="Service Title" />
+                                </Form.Group>
+
+                                <Form.Group>
+                                    <Form.Label>Service Description</Form.Label>
+                                    <Form.Control onChange={this.desOnChange} type="text" placeholder="Description" />
+                                </Form.Group>
+
+                                <Form.Group>
+                                    <Form.Label>Logo</Form.Label>
+                                    <Form.Control onChange={this.fileOnChange} type="file" placeholder="Logo" />
+                                </Form.Group>
+
+                                <Button variant="primary" type="submit">
+                                    Submit
+                                </Button>
+                            </Form>
+
+                        </Modal.Body>
                         <Modal.Footer>
                             <Button variant="secondary" onClick={this.addNewModalClose}>
                                 Close
-                            </Button>
-                            <Button variant="primary">
-                                Save Changes
                             </Button>
                         </Modal.Footer>
                     </Modal>
