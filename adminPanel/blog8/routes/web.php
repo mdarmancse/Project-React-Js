@@ -29,7 +29,7 @@ Route::post('/contactDelete', [\App\Http\Controllers\ContactController::class, '
 //course list
 Route::get('/courseList', [\App\Http\Controllers\CourseController::class, 'CourseList'])->middleware('loginCheck');
 Route::post('/courseDelete', [\App\Http\Controllers\CourseController::class, 'CourseDelete'])->middleware('loginCheck');
-
+Route::post('/courseAdd', [\App\Http\Controllers\CourseController::class, 'AddCourse'])->middleware('loginCheck');
 //service list
 Route::get('/serviceList', [\App\Http\Controllers\ServiceController::class, 'ServiceList'])->middleware('loginCheck');
 Route::post('/serviceDelete', [\App\Http\Controllers\ServiceController::class, 'ServiceDelete'])->middleware('loginCheck');
