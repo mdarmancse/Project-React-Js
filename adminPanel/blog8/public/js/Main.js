@@ -71802,12 +71802,19 @@ var ClientReviewPage = /*#__PURE__*/function (_Component) {
       rowDataId: '',
       deleteBtnText: "Delete",
       newBtnText: "Add New",
-      AddNewModal: false
+      AddNewModal: false,
+      addTitle: '',
+      addDes: '',
+      addFile: ''
     };
     _this.deleteData = _this.deleteData.bind(_assertThisInitialized(_this));
     _this.imageFormat = _this.imageFormat.bind(_assertThisInitialized(_this));
     _this.addNewModalOpen = _this.addNewModalOpen.bind(_assertThisInitialized(_this));
     _this.addNewModalClose = _this.addNewModalClose.bind(_assertThisInitialized(_this));
+    _this.fileOnChange = _this.fileOnChange.bind(_assertThisInitialized(_this));
+    _this.titleOnChange = _this.titleOnChange.bind(_assertThisInitialized(_this));
+    _this.desOnChange = _this.desOnChange.bind(_assertThisInitialized(_this));
+    _this.addFormSubmit = _this.addFormSubmit.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -71907,11 +71914,66 @@ var ClientReviewPage = /*#__PURE__*/function (_Component) {
       this.setState({
         AddNewModal: false
       });
+    } //Form dATA pULL
+
+  }, {
+    key: "titleOnChange",
+    value: function titleOnChange(event) {
+      var title = event.target.value;
+      this.setState({
+        addTitle: title
+      });
+    }
+  }, {
+    key: "desOnChange",
+    value: function desOnChange(event) {
+      var des = event.target.value;
+      this.setState({
+        addDes: des
+      });
+    }
+  }, {
+    key: "fileOnChange",
+    value: function fileOnChange(event) {
+      var photo = event.target.files[0];
+      this.setState({
+        addFile: photo
+      });
+    }
+  }, {
+    key: "addFormSubmit",
+    value: function addFormSubmit(event) {
+      var _this4 = this;
+
+      event.preventDefault();
+      var title = this.state.addTitle;
+      var des = this.state.addDes;
+      var photo = this.state.addFile; // alert(photo.name)
+
+      var url = "/reviewAdd";
+      var formData = new FormData();
+      formData.append('title', title);
+      formData.append('des', des);
+      formData.append('photo', photo);
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      };
+      axios__WEBPACK_IMPORTED_MODULE_6___default.a.post(url, formData, config).then(function (response) {
+        if (response.data == 1) {
+          _this4.addNewModalClose();
+
+          _this4.componentDidMount();
+        }
+      })["catch"](function (error) {
+        alert(error);
+      });
     }
   }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this5 = this;
 
       if (this.state.isLoading == true) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Menu__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["Container"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Loading_Loading__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
@@ -71936,7 +71998,7 @@ var ClientReviewPage = /*#__PURE__*/function (_Component) {
         var selectRow = {
           mode: 'radio',
           onSelect: function onSelect(row, isSelect, rowIndex) {
-            _this4.setState({
+            _this5.setState({
               rowDataId: row['id']
             });
           }
@@ -71964,12 +72026,27 @@ var ClientReviewPage = /*#__PURE__*/function (_Component) {
           onHide: this.addNewModalClose
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__["default"].Header, {
           closeButton: true
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__["default"].Title, null, "Modal heading")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__["default"].Body, null, "Woohoo, you're reading this text in a modal!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__["default"].Footer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__["default"].Title, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Add Review"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__["default"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["Form"], {
+          onSubmit: this.addFormSubmit
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["Form"].Group, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["Form"].Label, null, "Review Title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["Form"].Control, {
+          onChange: this.titleOnChange,
+          type: "text",
+          placeholder: "Review Title"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["Form"].Group, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["Form"].Label, null, "Review Description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["Form"].Control, {
+          onChange: this.desOnChange,
+          type: "text",
+          placeholder: "Description"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["Form"].Group, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["Form"].Label, null, "Client Photo"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["Form"].Control, {
+          onChange: this.fileOnChange,
+          type: "file",
+          placeholder: "Client Photo"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
+          variant: "primary",
+          type: "submit"
+        }, "Submit"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_8__["default"].Footer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
           variant: "secondary",
           onClick: this.addNewModalClose
-        }, "Close"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
-          variant: "primary"
-        }, "Save Changes"))));
+        }, "Close"))));
       }
     }
   }]);

@@ -41,6 +41,7 @@ Route::post('/projectDelete', [\App\Http\Controllers\ProjectController::class, '
 //review list
 Route::get('/reviewList', [\App\Http\Controllers\ReviewController::class, 'ReviewList'])->middleware('loginCheck');
 Route::post('/reviewDelete', [\App\Http\Controllers\ReviewController::class, 'ReviewDelete'])->middleware('loginCheck');
+Route::post('/reviewAdd', [\App\Http\Controllers\ReviewController::class, 'AddReview'])->middleware('loginCheck');
 
 
 Route::get('/', function () {

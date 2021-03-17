@@ -5,7 +5,7 @@ import Menu from "../components/Menu";
 import Loading from "../components/Loading/Loading";
 import Error from "../components/Error/Error";
 import Axios from "axios";
-import {Col, Container, img, Row} from "react-bootstrap";
+import {Col, Container, img, Row,Form} from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
@@ -20,12 +20,19 @@ class ClientReviewPage extends Component {
             deleteBtnText:"Delete",
             newBtnText:"Add New",
             AddNewModal:false,
+            addTitle:'',
+            addDes:'',
+            addFile:'',
 
         }
         this.deleteData=this.deleteData.bind(this);
         this.imageFormat=this.imageFormat.bind(this);
         this.addNewModalOpen=this.addNewModalOpen.bind(this);
         this.addNewModalClose=this.addNewModalClose.bind(this);
+        this.fileOnChange=this.fileOnChange.bind(this);
+        this.titleOnChange=this.titleOnChange.bind(this);
+        this.desOnChange=this.desOnChange.bind(this);
+        this.addFormSubmit=this.addFormSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -105,6 +112,70 @@ class ClientReviewPage extends Component {
     }
 
 
+    //Form dATA pULL
+    titleOnChange(event){
+
+        let title=event.target.value;
+        this.setState({addTitle:title});
+
+
+    }
+
+    desOnChange(event){
+
+        let des=event.target.value;
+        this.setState({addDes:des});
+
+    }
+    fileOnChange(event){
+        let photo=event.target.files[0];
+        this.setState({addFile:photo});
+
+    }
+
+    addFormSubmit(event){
+        event.preventDefault();
+
+        let title=this.state.addTitle;
+        let des=this.state.addDes;
+        let photo=this.state.addFile;
+
+
+// alert(photo.name)
+        let url="/reviewAdd";
+
+        let formData=new FormData();
+        formData.append('title',title);
+        formData.append('des',des);
+        formData.append('photo',photo);
+
+        let config={
+            headers:{'content-type':'multipart/form-data'}
+
+        }
+
+        Axios.post(url,formData,config).then((response)=> {
+
+          if(response.data==1){
+
+              this.addNewModalClose();
+              this.componentDidMount();
+
+          }
+
+        }).catch(function (error) {
+
+            alert(error);
+
+        });
+
+
+
+
+
+    }
+
+
 
 
 
@@ -156,6 +227,7 @@ class ClientReviewPage extends Component {
 
             return (
                 <>
+
                     <Menu title="Review">
                         <Container>
 
@@ -187,15 +259,34 @@ class ClientReviewPage extends Component {
 
                     <Modal show={this.state.AddNewModal} onHide={this.addNewModalClose}>
                         <Modal.Header closeButton>
-                            <Modal.Title>Modal heading</Modal.Title>
+                            <Modal.Title><h6>Add Review</h6></Modal.Title>
                         </Modal.Header>
-                        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                        <Modal.Body>
+                            <Form onSubmit={this.addFormSubmit}>
+                                <Form.Group >
+                                    <Form.Label>Review Title</Form.Label>
+                                    <Form.Control onChange={this.titleOnChange} type="text" placeholder="Review Title" />
+                                </Form.Group>
+
+                                <Form.Group>
+                                    <Form.Label>Review Description</Form.Label>
+                                    <Form.Control onChange={this.desOnChange} type="text" placeholder="Description" />
+                                </Form.Group>
+
+                                <Form.Group>
+                                    <Form.Label>Client Photo</Form.Label>
+                                    <Form.Control onChange={this.fileOnChange} type="file" placeholder="Client Photo" />
+                                </Form.Group>
+
+                                <Button variant="primary" type="submit">
+                                    Submit
+                                </Button>
+                            </Form>
+
+                        </Modal.Body>
                         <Modal.Footer>
                             <Button variant="secondary" onClick={this.addNewModalClose}>
                                 Close
-                            </Button>
-                            <Button variant="primary">
-                                Save Changes
                             </Button>
                         </Modal.Footer>
                     </Modal>
