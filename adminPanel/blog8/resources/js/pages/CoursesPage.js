@@ -9,6 +9,7 @@ import {Col, Container, Row, img, Form} from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import ReactQuill from "react-quill";
+import {toast} from "react-toastify";
 
 class CoursesPage extends Component {
     constructor(props) {
@@ -164,6 +165,15 @@ class CoursesPage extends Component {
         Axios.post(url,formData,config).then((response)=> {
 
             if(response.data==1){
+                toast.success(' Course added successfully!!', {
+                    position: "bottom-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
 
                 this.addNewModalClose();
                 this.componentDidMount();
@@ -171,8 +181,16 @@ class CoursesPage extends Component {
             }
 
         }).catch(function (error) {
-
-            alert(error);
+            toast.error('Something went wrong!!', {
+                position: "bottom-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+         //   alert(error);
 
         });
 
@@ -192,8 +210,16 @@ class CoursesPage extends Component {
             Axios.post('/courseDelete',{id:this.state.rowDataId}).then((response)=>{
 
                 if(response.data=1 && response.status==200){
-
-                    this.setState({deleteBtnText:"Delete Success"})
+                    toast.success('Delete Success!!', {
+                        position: "bottom-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                    //this.setState({deleteBtnText:"Delete Success"})
                     this.componentDidMount();
                     setTimeout(function () {
                         this.setState({deleteBtnText:"Delete "})

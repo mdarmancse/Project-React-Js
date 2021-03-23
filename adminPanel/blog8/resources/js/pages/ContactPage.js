@@ -4,6 +4,9 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 import Menu from "../components/Menu";
 import Loading from "../components/Loading/Loading";
 import Error from "../components/Error/Error";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import Axios from "axios";
 import {Col, Container, Row} from "react-bootstrap";
 
@@ -49,15 +52,31 @@ class ContactPage extends Component {
             Axios.post('/contactDelete',{id:this.state.rowDataId}).then((response)=>{
 
                 if(response.data=1 && response.status==200){
-
-                    this.setState({deleteBtnText:"Delete Success"})
+                    toast.success('Delete Success!!', {
+                        position: "bottom-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                   // this.setState({deleteBtnText:"Delete Success"})
                     this.componentDidMount();
                     setTimeout(function () {
                         this.setState({deleteBtnText:"Delete "})
                     }.bind(this),2000)
                 }else{
-
-                    this.setState({deleteBtnText:"Delete Failed"})
+                    toast.error('Delete Fail!', {
+                        position: "bottom-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                   // this.setState({deleteBtnText:"Delete Failed"})
                     setTimeout(function () {
                         this.setState({deleteBtnText:"Delete "})
                     }.bind(this),2000)
@@ -66,6 +85,15 @@ class ContactPage extends Component {
 
 
             }).catch((error)=>{
+                toast.error('Something went wrong!', {
+                    position: "bottom-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
                 this.setState({deleteBtnText:"Delete Failed"})
                 setTimeout(function () {
                     this.setState({deleteBtnText:"Delete "})

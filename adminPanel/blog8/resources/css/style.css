@@ -22,7 +22,7 @@ a:hover{
     background-color: #000000;!important;
 }
 .normal-btn:hover{
-    background-color: #000000!important;
+    background-color:  #61DAFB;!important;
 }
 .des-text{
     color: #636363!important;
@@ -35,6 +35,7 @@ a:hover{
     font-size: 18px;
     font-weight: 400;
     font-family: Montserrat;
+    margin-left: 10px;
 }
 .card{
     border: none!important;
@@ -103,3 +104,11 @@ a:hover{
     }
 
 }
+
+span:hover{
+
+    color: #61DAFB;!important;
+
+}
+
+

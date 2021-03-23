@@ -9,6 +9,8 @@ import {Col, Container, Row, img, Form} from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import ReactQuill from "react-quill";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class ProjectsPage extends Component {
     constructor(props) {
@@ -79,6 +81,7 @@ class ProjectsPage extends Component {
 
 
     componentDidMount() {
+
         Axios.get('/projectList').then((response)=>{
             if (response.status==200){
                 this.setState({dataList:response.data,isLoading:false,isError:false})
@@ -127,6 +130,15 @@ class ProjectsPage extends Component {
         Axios.post(url,formData,config).then((response)=> {
 
             if(response.data==1){
+                toast.success('Project added successfully!!', {
+                    position: "bottom-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
 
                 this.addNewModalClose();
                 this.componentDidMount();
@@ -134,8 +146,16 @@ class ProjectsPage extends Component {
             }
 
         }).catch(function (error) {
-
-            alert(error);
+            toast.error('Something went wrong!!', {
+                position: "bottom-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+           // alert(error);
 
         });
 
@@ -154,8 +174,16 @@ class ProjectsPage extends Component {
             Axios.post('/projectDelete',{id:this.state.rowDataId}).then((response)=>{
 
                 if(response.data=1 && response.status==200){
-
-                    this.setState({deleteBtnText:"Delete Success"})
+                    toast.success('Delete Success!!', {
+                        position: "bottom-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                    //this.setState({deleteBtnText:"Delete Success"})
                     this.componentDidMount();
                     setTimeout(function () {
                         this.setState({deleteBtnText:"Delete "})
@@ -282,6 +310,7 @@ class ProjectsPage extends Component {
 
 
                         </Container>
+
 
 
                     </Menu>

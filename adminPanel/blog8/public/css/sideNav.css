@@ -2,7 +2,7 @@
 .sideNavClose{
 
     height: 100%;
-    width: 0;
+    width: 60px;
     position: fixed;
     z-index: 10;
     top: 0;
