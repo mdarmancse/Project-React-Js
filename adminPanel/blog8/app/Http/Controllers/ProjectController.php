@@ -34,8 +34,8 @@ class ProjectController extends Controller
 
 
 
-        $photoOneUrl = "/storage/" . $photoOneName;
-        $photoTwoUrl = "/storage/" . $photoTwoName;
+        $photoOneUrl ="http://".$_SERVER['HTTP_HOST']. "/storage/" . $photoOneName;
+        $photoTwoUrl ="http://".$_SERVER['HTTP_HOST']. "/storage/" . $photoTwoName;
         $result = ProjectModel::insert([
 
             'project_name' => $title,

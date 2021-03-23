@@ -37,7 +37,7 @@ class CourseController extends Controller
 
 
 
-        $photoOneUrl = "/storage/" . $photoOneName;
+        $photoOneUrl = "http://".$_SERVER['HTTP_HOST']."/storage/" . $photoOneName;
 
         $result = CourseTable::insert([
 

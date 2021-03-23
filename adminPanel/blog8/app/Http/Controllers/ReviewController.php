@@ -31,7 +31,7 @@ class ReviewController extends Controller
         $photoName = explode("/", $photoPath)[1];
 
 
-        $photoUrl ="/storage/" . $photoName;
+        $photoUrl ="http://".$_SERVER['HTTP_HOST']."/storage/" . $photoName;
         $result = ClientReview::insert([
 
             'client_title' => $title,
