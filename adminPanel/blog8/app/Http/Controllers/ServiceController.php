@@ -15,6 +15,13 @@ class ServiceController extends Controller
 
     function ServiceDelete(Request $request){
         $id=$request->input('id');
+        $img_one=ServicesModel::where('id',$id)->get(['service_logo']);
+
+
+        $imageOne=explode('/',$img_one[0]['service_logo'])[4];
+
+
+        Storage::delete('public/'.$imageOne);
         $result=ServicesModel::where('id',$id)->delete();
         return $result;
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ProjectModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -16,6 +17,16 @@ class ProjectController extends Controller
 
     function ProjectDelete(Request $request){
         $id=$request->input('id');
+
+        $img_one=ProjectModel::where('id',$id)->get(['img_one']);
+        $img_two=ProjectModel::where('id',$id)->get(['img_two']);
+
+        $imageOne=explode('/',$img_one[0]['img_one'])[4];
+        $imageTwo=explode('/',$img_two[0]['img_two'])[4];
+
+        Storage::delete('public/'.$imageOne);
+        Storage::delete('public/'.$imageTwo);
+
         $result=ProjectModel::where('id',$id)->delete();
         return $result;
 

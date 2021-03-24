@@ -17,6 +17,13 @@ class ReviewController extends Controller
     function ReviewDelete(Request $request)
     {
         $id = $request->input('id');
+        $img_one=ClientReview::where('id',$id)->get(['client_img']);
+
+
+        $imageOne=explode('/',$img_one[0]['client_img'])[4];
+
+
+        Storage::delete('public/'.$imageOne);
         $result = ClientReview::where('id', $id)->delete();
         return $result;
 

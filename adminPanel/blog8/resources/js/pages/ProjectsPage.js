@@ -189,8 +189,16 @@ class ProjectsPage extends Component {
                         this.setState({deleteBtnText:"Delete "})
                     }.bind(this),2000)
                 }else{
-
-                    this.setState({deleteBtnText:"Delete Failed"})
+                    toast.error('Delete Fail!', {
+                        position: "bottom-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                  //  this.setState({deleteBtnText:"Delete Failed"})
                     setTimeout(function () {
                         this.setState({deleteBtnText:"Delete "})
                     }.bind(this),2000)
@@ -199,7 +207,16 @@ class ProjectsPage extends Component {
 
 
             }).catch((error)=>{
-                this.setState({deleteBtnText:"Delete Failed"})
+                toast.error('Something went wrong!', {
+                    position: "bottom-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+              //  this.setState({deleteBtnText:"Delete Failed"})
                 setTimeout(function () {
                     this.setState({deleteBtnText:"Delete "})
                 }.bind(this),2000)
@@ -213,7 +230,7 @@ class ProjectsPage extends Component {
     imageFormat(cell,row){
 
         return(
-            <img className="w-50" src={cell}/>
+            <img className="w-25" src={cell}/>
         )
 
 
@@ -270,7 +287,7 @@ class ProjectsPage extends Component {
                 {dataField:'id',text:'ID'},
                 {dataField:'project_name',text:'Project Name'},
                 {dataField:'short_des',text:'Description'},
-                {dataField:'project_feature',text:'Features'},
+               // {dataField:'project_feature',text:'Features'},
                 {dataField:'img_one',text:'Project Image',formatter:this.imageFormat},
                 {dataField:'img_two',text:'Feature Image',formatter:this.imageFormat},
             ];

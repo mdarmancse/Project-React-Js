@@ -225,8 +225,17 @@ class CoursesPage extends Component {
                         this.setState({deleteBtnText:"Delete "})
                     }.bind(this),2000)
                 }else{
+                    toast.error('Delete Fail!', {
+                        position: "bottom-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
 
-                    this.setState({deleteBtnText:"Delete Failed"})
+                    //this.setState({deleteBtnText:"Delete Failed"})
                     setTimeout(function () {
                         this.setState({deleteBtnText:"Delete "})
                     }.bind(this),2000)
@@ -235,7 +244,16 @@ class CoursesPage extends Component {
 
 
             }).catch((error)=>{
-                this.setState({deleteBtnText:"Delete Failed"})
+                toast.error('Delete Fail!', {
+                    position: "bottom-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+                //this.setState({deleteBtnText:"Delete Failed"})
                 setTimeout(function () {
                     this.setState({deleteBtnText:"Delete "})
                 }.bind(this),2000)

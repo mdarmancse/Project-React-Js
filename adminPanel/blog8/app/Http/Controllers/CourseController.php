@@ -15,6 +15,15 @@ class CourseController extends Controller
 
     function CourseDelete(Request $request){
         $id=$request->input('id');
+
+        $img_one=CourseTable::where('id',$id)->get(['small_image']);
+
+
+        $imageOne=explode('/',$img_one[0]['img_one'])[4];
+
+
+        Storage::delete('public/'.$imageOne);
+
         $result=CourseTable::where('id',$id)->delete();
         return $result;
 
